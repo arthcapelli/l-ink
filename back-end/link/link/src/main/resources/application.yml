@@ -1,0 +1,22 @@
+server:
+  port: 8090
+  servlet:
+    context-path: /tcc
+  error:
+    include-message: always
+    include-binding-errors: always
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  datasource:
+    hikari:
+      maximum-pool-size: 3
+    username: fcoywzhgxoswio
+    password: 55229195efd7abe35693edffd807fd2aa65d8992d2de5e33b3c511a648e04a50
+    url: jdbc:postgresql://ec2-52-203-118-49.compute-1.amazonaws.com:5432/dcpk8rvs4qh291
+    driver-class-name: org.postgresql.Driver
