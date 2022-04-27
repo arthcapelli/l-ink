@@ -1,7 +1,6 @@
 package br.com.tcc.link.service.authentication;
 
 import br.com.tcc.link.exception.BusinessValidationException;
-import br.com.tcc.link.exception.NotFoundException;
 import br.com.tcc.link.mapper.UserMapper;
 import br.com.tcc.link.repository.UserRepository;
 import br.com.tcc.link.representation.request.authentication.CreateUserRequest;
@@ -20,7 +19,7 @@ public class CreateUserService {
     public void create(final CreateUserRequest request) {
 
         if (repository.existsByEmail(request.getEmail())) {
-            throw new NotFoundException("Email já registrado na base.");
+            throw new BusinessValidationException("Email já registrado na base.");
         }
 
         if (!request.getPassword().equals(request.getConfirmPassword())) {
