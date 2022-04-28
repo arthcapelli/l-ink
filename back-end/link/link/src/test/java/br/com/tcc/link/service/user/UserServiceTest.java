@@ -1,10 +1,10 @@
-package br.com.tcc.link.service.authentication;
+package br.com.tcc.link.service.user;
 
 import br.com.tcc.link.domain.User;
 import br.com.tcc.link.exception.BusinessValidationException;
 import br.com.tcc.link.mapper.UserMapper;
 import br.com.tcc.link.repository.UserRepository;
-import br.com.tcc.link.representation.request.authentication.CreateUserRequest;
+import br.com.tcc.link.representation.request.user.CreateUserRequest;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,10 +19,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class CreateUserServiceTest {
+public class UserServiceTest {
 
     @InjectMocks
-    private CreateUserService service;
+    private UserService service;
 
     @Mock
     private UserRepository repository;
@@ -79,7 +79,7 @@ public class CreateUserServiceTest {
         service.create(request);
 
         verify(repository).existsByEmail(request.getEmail());
-        verify(mapper).toDomian(request);
+        verify(mapper).toDomain(request);
 
     }
 

@@ -1,4 +1,4 @@
-package br.com.tcc.link.representation.request.authentication;
+package br.com.tcc.link.representation.request.user;
 
 import lombok.*;
 
@@ -16,5 +16,5 @@ public class CreateUserRequest {
     private String confirmPassword;
     private String avatar;
     private Boolean isTattooArtist;
-    private List<String> interests;
+    private List<String> userTags;
 }

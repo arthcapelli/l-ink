@@ -33,5 +33,4 @@ public class User {
     @Column(name = "is_tattoo_artist")
     private Boolean isTattooArtist;
 
-    //private List<String> interests;
 }
