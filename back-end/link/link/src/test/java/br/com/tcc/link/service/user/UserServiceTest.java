@@ -1,16 +1,22 @@
 package br.com.tcc.link.service.user;
 
+import br.com.tcc.link.domain.StyleTags;
 import br.com.tcc.link.domain.User;
 import br.com.tcc.link.exception.BusinessValidationException;
 import br.com.tcc.link.mapper.UserMapper;
 import br.com.tcc.link.repository.UserRepository;
 import br.com.tcc.link.representation.request.user.CreateUserRequest;
+import br.com.tcc.link.service.tag.UserTagService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static br.com.tcc.link.fixture.CreateUserRequestFixture.makeRandomCreateUserRequest;
 import static br.com.tcc.link.fixture.CreateUserRequestFixture.makeValidCreateUserRequest;
@@ -29,6 +35,9 @@ public class UserServiceTest {
 
     @Mock
     private UserMapper mapper;
+
+    @Mock
+    private UserTagService userTagService;
 
     User user;
     CreateUserRequest request;
@@ -49,7 +58,7 @@ public class UserServiceTest {
             assertEquals("Email já registrado na base.", ex.getMessage());
         } finally {
             verify(repository).existsByEmail(request.getEmail());
-            verifyNoInteractions(mapper);
+            verifyNoInteractions(mapper, userTagService);
         }
     }
 
@@ -65,22 +74,34 @@ public class UserServiceTest {
             assertEquals("Confirmação de senha tem valor diferente de Senha.", ex.getMessage());
         } finally {
             verify(repository).existsByEmail(request.getEmail());
-            verifyNoInteractions(mapper);
+            verifyNoInteractions(mapper, userTagService);
         }
     }
 
     @Test
     public void success() {
 
-        final CreateUserRequest request = makeValidCreateUserRequest();
+        List<String> userTags = Arrays.stream(StyleTags.values())
+                .map(StyleTags::getDescription)
+                .collect(Collectors.toList());
+
+        final CreateUserRequest request = makeValidCreateUserRequest(userTags);
 
         when(repository.existsByEmail(request.getEmail())).thenReturn(false);
+        when(mapper.toDomain(request)).thenReturn(user);
+        when(repository.findByEmail(request.getEmail())).thenReturn(user);
 
         service.create(request);
 
         verify(repository).existsByEmail(request.getEmail());
+        verify(repository).save(user);
         verify(mapper).toDomain(request);
 
+        verify(repository).existsByEmail(request.getEmail());
+        verify(repository).save(user);
+        verify(mapper).toDomain(request);
+
+        request.getUserTags().forEach(tag -> verify(userTagService).save(tag, user.getId()));
     }
 
 }
