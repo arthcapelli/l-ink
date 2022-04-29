@@ -2,6 +2,8 @@ package br.com.tcc.link.fixture;
 
 import br.com.tcc.link.representation.request.user.CreateUserRequest;
 
+import java.util.List;
+
 import static java.util.Collections.emptyList;
 import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
 import static org.apache.commons.lang3.RandomUtils.nextBoolean;
@@ -19,7 +21,7 @@ public class CreateUserRequestFixture {
                 .build();
     }
 
-    public static CreateUserRequest makeValidCreateUserRequest() {
+    public static CreateUserRequest makeValidCreateUserRequest(List<String> userTags) {
         final String password = randomAlphabetic(10);
         return CreateUserRequest.builder()
                 .name(randomAlphabetic(10))
@@ -28,7 +30,7 @@ public class CreateUserRequestFixture {
                 .confirmPassword(password)
                 .avatar(randomAlphabetic(10))
                 .isTattooArtist(nextBoolean())
-                .userTags(emptyList())
+                .userTags(userTags)
                 .build();
     }
 }

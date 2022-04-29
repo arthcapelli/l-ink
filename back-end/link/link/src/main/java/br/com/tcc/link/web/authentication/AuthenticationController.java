@@ -1,5 +1,8 @@
 package br.com.tcc.link.web.authentication;
 
+import br.com.tcc.link.representation.request.authentication.LoginRequest;
+import br.com.tcc.link.service.authentication.LoginService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -7,17 +10,12 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("autenticacao")
 public class AuthenticationController {
 
-
-    /*
-        @Autowired
-        LogarUsuarioService logarUsuarioService;
-    */
-
+    @Autowired
+    private LoginService loginService;
 
     @PostMapping("login")
     @ResponseStatus(HttpStatus.OK)
-    public String logarUsuario() {
-        return null;
-        //       return logarUsuarioService.logarUsuario(request);
+    public String login(@RequestBody final LoginRequest request) {
+        return loginService.login(request);
     }
 }
