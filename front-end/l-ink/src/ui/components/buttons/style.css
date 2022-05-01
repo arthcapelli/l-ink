@@ -1,0 +1,16 @@
+.botao-generico {
+  min-width: 170px;
+  min-height: 70px;
+  margin: 10px;
+  padding: 10px;
+  color: #ffffff;
+  font-family: font-link;
+  background-color: #59081e;
+  font-size: 18px;
+  border-radius: 7px;
+}
+
+.botao-generico-desabilitado {
+  cursor: initial;
+  background-color: #a68689;
+}

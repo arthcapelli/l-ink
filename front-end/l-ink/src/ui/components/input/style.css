@@ -1,0 +1,18 @@
+.input {
+  width: 200px;
+  height: 40px;
+  font-family: fonte-wow;
+  font-size: 20px;
+  border: 2px solid rgba(33, 21, 16, 0.795);
+  border-radius: 5px;
+  box-shadow: inset 0 0 20px 6px #c77e19;
+  text-align: center;
+  color: rgba(80, 28, 6, 0.712);
+  outline: none;
+}
+
+.input:focus {
+  background: rgba(63, 22, 4, 0.712);
+  color: rgb(246, 211, 153);
+  box-shadow: 0 5px 15px 6px rgba(33, 21, 16, 0.795);
+}
