@@ -1,0 +1,33 @@
+.register-user-screen {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.register-user-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 20px 0;
+}
+
+.register-user-header p {
+  font-size: 20px;
+}
+
+.register-user-logo {
+  width: 30%;
+}
+
+.register-user-content {
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.register-user-select-label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

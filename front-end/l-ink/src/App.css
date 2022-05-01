@@ -1,5 +1,11 @@
 .App {
   text-align: center;
+  font-family: font-link;
+}
+
+.App > p {
+  text-align: center;
+  font-family: font-link;
 }
 
 .App-logo {
@@ -11,6 +17,10 @@
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
+}
+
+* {
+  box-sizing: border-box;
 }
 
 .App-header {
@@ -26,6 +36,19 @@
 
 .App-link {
   color: #61dafb;
+}
+
+.primary-color {
+  color: #59081e;
+}
+
+.secondary-color {
+  color: #a68689;
+}
+
+.container {
+  width: 80%;
+  margin: auto;
 }
 
 @keyframes App-logo-spin {
