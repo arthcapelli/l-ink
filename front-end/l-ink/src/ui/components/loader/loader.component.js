@@ -1,5 +1,5 @@
 import { useGlobalShowLoader } from "../../../context"
-// import { logo } from "../../assets"
+import { CircularProgress } from "@material-ui/core"
 
 import "./style.css"
 
@@ -8,8 +8,7 @@ const Loader = () => {
 
   return showLoader ? (
     <div className="loader">
-      {/* <img src={logo} className="loader-logo" alt="logo" /> */}
-      CARREGANDO
+      <CircularProgress />
     </div>
   ) : null
 }
