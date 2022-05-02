@@ -13,21 +13,3 @@
   align-items: center;
 }
 
-.loader-logo {
-  height: 200px;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .loader-logo {
-    animation: loader-logo-spin infinite 20s linear;
-  }
-}
-
-@keyframes loader-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}

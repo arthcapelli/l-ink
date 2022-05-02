@@ -2,7 +2,7 @@
   position: absolute;
   top: 30px;
   right: 30px;
-  width: 220px;
+  width: 300px;
   height: 100px;
   border-radius: 4px;
   display: flex;
@@ -24,11 +24,11 @@
 }
 
 .toast--success {
-  background-color: #87fa83;
+  background-color: #bafdb8e7;
   color: #282c34;
 }
 
 .toast--error {
-  background-color: #fa6072;
+  background-color: #af0a1db6;
   color: #ffffff;
 }

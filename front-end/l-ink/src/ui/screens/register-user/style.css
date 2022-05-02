@@ -1,5 +1,5 @@
 .register-user-screen {
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
 }
@@ -20,7 +20,7 @@
 }
 
 .register-user-content {
-  min-height: 80vh;
+  height: 78vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -30,4 +30,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.register-user-btn-label {
+  color: #a68689;
+  font-size: 16px;
 }

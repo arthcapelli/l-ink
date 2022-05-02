@@ -105,11 +105,15 @@ export function RegisterUserScreen() {
             name={"CADASTRAR"}
             onClick={handleSubmit}
           ></ButtonFunction>
-          <ButtonLink
-            disabled={true}
-            path={ROUTES.LOGIN}
-            name="VOLTAR"
-          ></ButtonLink>
+
+          <div className="register-user-btn-label">
+            <p>Já possui cadastro?</p>
+            <ButtonLink
+              isSecondary
+              path={ROUTES.LOGIN}
+              name="VOLTAR"
+            ></ButtonLink>
+          </div>
         </div>
       </form>
     </div>

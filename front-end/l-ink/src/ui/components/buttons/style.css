@@ -1,4 +1,4 @@
-.botao-generico {
+.btn-generic {
   min-width: 170px;
   min-height: 70px;
   margin: 10px;
@@ -10,7 +10,19 @@
   border-radius: 7px;
 }
 
-.botao-generico-desabilitado {
+.btn-secondary {
+  border: none;
+  background-color: transparent;
+  color: #59081e;
+  font-size: 14px;
+  text-decoration: underline;
+  min-width: 0;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.btn-generic:disabled {
   cursor: initial;
   background-color: #a68689;
 }

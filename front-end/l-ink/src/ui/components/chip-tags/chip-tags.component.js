@@ -45,9 +45,14 @@ export function MultipleSelectChip({ setUserTags }) {
   return (
     <div>
       <FormControl sx={{ m: 1, width: 300 }}>
-        <InputLabel id="demo-multiple-chip-label">Tags</InputLabel>
+        <InputLabel
+          id="demo-multiple-chip-label"
+          style={{ marginLeft: "15px" }}
+        >
+          Tags
+        </InputLabel>
         <Select
-          style={{ maxWidth: 300, width: 300 }}
+          style={{ maxWidth: 285, width: 285 }}
           labelId="demo-multiple-chip-label"
           id="demo-multiple-chip"
           multiple
