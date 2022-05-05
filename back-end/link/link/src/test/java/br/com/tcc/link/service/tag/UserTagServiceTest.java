@@ -48,7 +48,7 @@ public class UserTagServiceTest {
 
         UserTag userTag = captor.getValue();
 
-        assertEquals(idUser, userTag.getIdUser());
+        assertEquals(idUser, userTag.getUserId());
         assertEquals(tagName, userTag.getTagName());
     }
 }

@@ -1,6 +1,8 @@
 import axios from "axios"
 import { useLoader, useToast } from "../hooks"
 import { API_URL, API_METHOD } from "../constants"
+import { useGlobalUser } from "../context"
+import { useCallback } from "react"
 
 const axiosInstance = axios.create({
   baseURL: API_URL,
@@ -9,13 +11,16 @@ const axiosInstance = axios.create({
 const useAxios = () => {
   const { showSuccessToast, showErrorToast } = useToast()
   const { showLoader, hideLoader } = useLoader()
+  const [user] = useGlobalUser()
 
   const callApi = async (method, url, data) => {
     const requestConfig = {
       method,
       url,
       data,
-      headers: {},
+      headers: {
+        authorization: user.token,
+      },
     }
 
     try {
@@ -47,12 +52,15 @@ const useAxios = () => {
     return callApi(API_METHOD.DELETE, url)
   }
 
-  return {
-    get,
-    post,
-    put,
-    del,
-  }
+  return useCallback(
+    {
+      get,
+      post,
+      put,
+      del,
+    },
+    [user]
+  )
 }
 
 export { useAxios }

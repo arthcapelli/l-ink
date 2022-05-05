@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface UserTagRepository extends CrudRepository<UserTag, Integer> {
 
-    List<UserTag> findAllByIdUser(Integer idUser);
+    List<UserTag> findAllByUserId(Integer idUser);
 }
