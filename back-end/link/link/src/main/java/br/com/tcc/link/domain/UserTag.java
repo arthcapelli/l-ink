@@ -23,10 +23,10 @@ public class UserTag {
 
     private String tagName;
 
-    private Integer idUser;
+    private Integer userId;
 
-    public UserTag(String tagName, Integer idUser) {
+    public UserTag(String tagName, Integer userId) {
         this.tagName = tagName;
-        this.idUser = idUser;
+        this.userId = userId;
     }
 }

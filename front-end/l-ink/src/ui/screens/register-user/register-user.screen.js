@@ -42,6 +42,8 @@ export function RegisterUserScreen() {
       isTattooArtist,
       userTags
     )
+
+    history.push(ROUTES.HOME)
   }
 
   function handleSubmit(evento) {

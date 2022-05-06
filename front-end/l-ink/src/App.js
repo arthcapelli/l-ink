@@ -1,12 +1,33 @@
-import { Route, Switch } from "react-router-dom"
+import { useEffect } from "react"
+import { Route, Switch, Redirect, useHistory } from "react-router-dom"
 import "./App.css"
 import { ROUTES } from "./constants/index"
-import { Loader } from "./ui/components"
-import { Toast } from "./ui/components/toast/toast.component"
-import { RegisterUserScreen } from "./ui/screens/index"
+import { Loader, Toast } from "./ui/components"
+import { RegisterUserScreen, LoginScreen, HomeScreen } from "./ui/screens/index"
 import { createTheme, ThemeProvider } from "@material-ui/core/styles"
+import { useGlobalUser } from "./context"
+
+function PrivateRoute({ path, children }) {
+  const [user] = useGlobalUser()
+
+  if (!user?.token) {
+    return <Redirect to={ROUTES.LOGIN} />
+  }
+
+  return (
+    <Route path={path} exact>
+      {children}
+    </Route>
+  )
+}
 
 function App() {
+  const [user, setUser] = useGlobalUser()
+
+  useEffect(() => {
+    localStorage.setItem("user", JSON.stringify(user))
+  }, [user])
+
   const theme = createTheme({
     palette: {
       primary: {
@@ -23,6 +44,15 @@ function App() {
         <Switch>
           <Route path={ROUTES.REGISTER_USER} exact>
             <RegisterUserScreen />
+          </Route>
+          <Route path={ROUTES.LOGIN} exact>
+            <LoginScreen />
+          </Route>
+          <PrivateRoute path={ROUTES.HOME} exact>
+            <HomeScreen />
+          </PrivateRoute>
+          <Route path="/">
+            <Redirect to="/" />
           </Route>
         </Switch>
         <Loader />
