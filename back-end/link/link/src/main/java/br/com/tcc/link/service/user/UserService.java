@@ -37,4 +37,8 @@ public class UserService {
 
         request.getUserTags().forEach(tag -> userTagService.save(tag, user.getId()));
     }
+
+    public User findById(final Integer userId){
+        return repository.findUserById(userId);
+    }
 }

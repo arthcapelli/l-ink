@@ -16,5 +16,6 @@ public class CreateUserRequest {
     private String confirmPassword;
     private String avatar;
     private Boolean isTattooArtist;
+    private Integer expTime;
     private List<String> userTags;
 }

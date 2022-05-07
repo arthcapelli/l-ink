@@ -33,4 +33,7 @@ public class User {
     @Column(name = "is_tattoo_artist")
     private Boolean isTattooArtist;
 
+    @Column(name = "exp_time")
+    private Integer expTime;
+
 }
