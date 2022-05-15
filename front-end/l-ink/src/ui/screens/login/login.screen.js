@@ -24,10 +24,12 @@ export function LoginScreen() {
 
     const token = await login(email, password)
 
-    const user = { token }
-    setUser(user)
+    if (token) {
+      const user = { token }
+      setUser(user)
 
-    history.push(ROUTES.HOME)
+      history.push(ROUTES.HOME)
+    }
   }
 
   function handleSubmit(evento) {

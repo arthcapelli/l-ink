@@ -12,6 +12,7 @@ import { useToast } from "../../../hooks"
 import Switch from "@material-ui/core/Switch"
 import "./style.css"
 import logo from "../../../assets/images/logo.png"
+import { useGlobalUser } from "../../../context"
 
 export function RegisterUserScreen() {
   const { showErrorToast } = useToast()
@@ -23,7 +24,8 @@ export function RegisterUserScreen() {
   const [isTattooArtist, setIsTattooArtist] = useState(false)
   const [userTags, setUserTags] = useState([])
   const history = useHistory()
-  const { createUser } = useLinkApi()
+  const [, setUser] = useGlobalUser()
+  const { createUser, login } = useLinkApi()
 
   async function register() {
     if (!name.length || !password.length) {
@@ -33,7 +35,7 @@ export function RegisterUserScreen() {
       return
     }
 
-    await createUser(
+    const response = await createUser(
       email,
       avatar,
       name,
@@ -43,11 +45,18 @@ export function RegisterUserScreen() {
       userTags
     )
 
-    history.push(ROUTES.HOME)
+    if (response) {
+      const token = await login(email, password)
+
+      const user = { token }
+      setUser(user)
+
+      history.push(ROUTES.HOME)
+    }
   }
 
-  function handleSubmit(evento) {
-    evento.preventDefault()
+  function handleSubmit(event) {
+    event.preventDefault()
 
     register()
   }

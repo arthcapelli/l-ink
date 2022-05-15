@@ -11,7 +11,7 @@ import java.util.List;
 @Component
 public class PostMapper {
 
-    public static Post toDomain(final CreatePostRequest request) {
+    public Post toDomain(final CreatePostRequest request) {
       return Post.builder()
               .postImg(request.getPostImg())
               .bodyLocal(request.getBodyLocal())
@@ -20,7 +20,7 @@ public class PostMapper {
               .build();
     }
 
-    public static PostResponse toPostResponse(final Post post, final List<String> postTags, final UserResponse userResponse){
+    public PostResponse toPostResponse(final Post post, final List<String> postTags, final UserResponse userResponse){
         return PostResponse.builder()
                 .id(post.getId())
                 .postImg(post.getPostImg())

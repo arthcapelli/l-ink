@@ -2,6 +2,7 @@ package br.com.tcc.link.web.user;
 
 
 import br.com.tcc.link.representation.request.user.CreateUserRequest;
+import br.com.tcc.link.representation.response.user.UserResponse;
 import br.com.tcc.link.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,7 +17,7 @@ public class UserController {
 
     @PostMapping("criar-usuario")
     @ResponseStatus(HttpStatus.CREATED)
-    public void createUser(@RequestBody final CreateUserRequest request) {
-        userService.create(request);
+    public UserResponse createUser(@RequestBody final CreateUserRequest request) {
+        return userService.create(request);
     }
 }

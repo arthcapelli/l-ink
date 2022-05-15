@@ -3,6 +3,7 @@ package br.com.tcc.link.service.post;
 import br.com.tcc.link.domain.Post;
 import br.com.tcc.link.domain.User;
 import br.com.tcc.link.mapper.PostMapper;
+import br.com.tcc.link.mapper.UserMapper;
 import br.com.tcc.link.repository.PostRepository;
 import br.com.tcc.link.representation.request.post.CreatePostRequest;
 import br.com.tcc.link.representation.response.post.PostResponse;
@@ -15,10 +16,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static br.com.tcc.link.mapper.PostMapper.toDomain;
-import static br.com.tcc.link.mapper.PostMapper.toPostResponse;
-import static br.com.tcc.link.mapper.UserMapper.toUserResponse;
-
 @Service
 public class PostService {
 
@@ -29,13 +26,16 @@ public class PostService {
     private PostMapper mapper;
 
     @Autowired
+    private UserMapper userMapper;
+
+    @Autowired
     private PostTagService postTagService;
 
     @Autowired
     private UserService userService;
 
     public void create(final CreatePostRequest request) {
-        Post post = toDomain(request);
+        Post post = mapper.toDomain(request);
 
         repository.save(post);
 
@@ -54,9 +54,9 @@ public class PostService {
         return postList.stream()
                 .map(post -> {
                     User user = userService.findById(post.getUserId());
-                    UserResponse userResponse = toUserResponse(user);
+                    UserResponse userResponse = userMapper.toUserResponse(user);
 
-                    return toPostResponse(post, postTagService.findAllByPostId(post.getId()), userResponse);
+                    return mapper.toPostResponse(post, postTagService.findAllByPostId(post.getId()), userResponse);
                 })
                 .collect(Collectors.toList());
     }

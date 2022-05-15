@@ -12,7 +12,7 @@ const useLinkApi = () => {
     isTattooArtist,
     userTags
   ) => {
-    await post(`usuario/criar-usuario`, {
+    const response = await post(`usuario/criar-usuario`, {
       email,
       avatar,
       name,
@@ -21,6 +21,8 @@ const useLinkApi = () => {
       isTattooArtist,
       userTags,
     })
+
+    return response
   }
 
   const login = async (email, password) => {

@@ -5,6 +5,7 @@ import br.com.tcc.link.exception.BusinessValidationException;
 import br.com.tcc.link.mapper.UserMapper;
 import br.com.tcc.link.repository.UserRepository;
 import br.com.tcc.link.representation.request.user.CreateUserRequest;
+import br.com.tcc.link.representation.response.user.UserResponse;
 import br.com.tcc.link.service.tag.UserTagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,7 @@ public class UserService {
     @Autowired
     private UserTagService userTagService;
 
-    public void create(final CreateUserRequest request) {
+    public UserResponse create(final CreateUserRequest request) {
 
         if (repository.existsByEmail(request.getEmail())) {
             throw new BusinessValidationException("Email já registrado na base.");
@@ -36,6 +37,8 @@ public class UserService {
         final User user = repository.findByEmail(request.getEmail());
 
         request.getUserTags().forEach(tag -> userTagService.save(tag, user.getId()));
+
+        return mapper.toUserResponse(user);
     }
 
     public User findById(final Integer userId){

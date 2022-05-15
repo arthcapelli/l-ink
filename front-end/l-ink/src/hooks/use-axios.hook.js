@@ -9,7 +9,7 @@ const axiosInstance = axios.create({
 })
 
 const useAxios = () => {
-  const { showSuccessToast, showErrorToast } = useToast()
+  const { showErrorToast } = useToast()
   const { showLoader, hideLoader } = useLoader()
   const [user] = useGlobalUser()
 
@@ -26,7 +26,6 @@ const useAxios = () => {
     try {
       showLoader()
       const { data } = await axiosInstance.request(requestConfig)
-      showSuccessToast()
       return data
     } catch (requestError) {
       console.log(requestError)

@@ -79,7 +79,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void success() {
+    public void createUserWithSuccess() {
 
         List<String> userTags = Arrays.stream(StyleTags.values())
                 .map(StyleTags::getDescription)
@@ -104,4 +104,18 @@ public class UserServiceTest {
         request.getUserTags().forEach(tag -> verify(userTagService).save(tag, user.getId()));
     }
 
+    @Test
+    public void findUserByIdWithSuccess() {
+        when(repository.findUserById(user.getId())).thenReturn(user);
+
+        User response = service.findById(user.getId());
+
+        assertEquals(user.getId(), response.getId());
+        assertEquals(user.getName(), response.getName());
+        assertEquals(user.getEmail(), response.getEmail());
+        assertEquals(user.getAvatar(), response.getAvatar());
+        assertEquals(user.getExpTime(), response.getExpTime());
+        assertEquals(user.getIsTattooArtist(), response.getIsTattooArtist());
+        assertEquals(user.getPassword(), response.getPassword());
+    }
 }
