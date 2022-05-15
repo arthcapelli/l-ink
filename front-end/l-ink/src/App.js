@@ -10,7 +10,7 @@ import { useGlobalUser } from "./context"
 function PrivateRoute({ path, children }) {
   const [user] = useGlobalUser()
 
-  if (!user?.token) {
+  if (!user?.id) {
     return <Redirect to={ROUTES.LOGIN} />
   }
 
@@ -48,9 +48,9 @@ function App() {
           <Route path={ROUTES.LOGIN} exact>
             <LoginScreen />
           </Route>
-          <PrivateRoute path={ROUTES.HOME} exact>
+          <Route path={ROUTES.HOME} exact>
             <HomeScreen />
-          </PrivateRoute>
+          </Route>
           <Route path="/">
             <Redirect to="/" />
           </Route>

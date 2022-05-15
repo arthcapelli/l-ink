@@ -46,10 +46,9 @@ export function RegisterUserScreen() {
     )
 
     if (response) {
-      const token = await login(email, password)
+      const userResponse = await login(email, password)
 
-      const user = { token }
-      setUser(user)
+      setUser(userResponse)
 
       history.push(ROUTES.HOME)
     }

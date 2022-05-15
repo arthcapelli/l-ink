@@ -1,0 +1,32 @@
+.header-content {
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #a6868923;
+}
+
+.logo-header {
+    width: 25%;
+}
+
+.avatar {
+    width: 50%;
+    border-radius: 15px;
+}
+
+.header-user{
+    width: 35%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-anonymous{
+    width: 60%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

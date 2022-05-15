@@ -3,8 +3,10 @@ package br.com.tcc.link.service.authentication;
 import br.com.tcc.link.domain.User;
 import br.com.tcc.link.exception.BusinessValidationException;
 import br.com.tcc.link.exception.NotFoundException;
+import br.com.tcc.link.mapper.UserMapper;
 import br.com.tcc.link.repository.UserRepository;
 import br.com.tcc.link.representation.request.authentication.LoginRequest;
+import br.com.tcc.link.representation.response.user.UserResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +18,10 @@ public class LoginService {
     @Autowired
     private UserRepository repository;
 
-    public String login(final LoginRequest request) {
+    @Autowired
+    private UserMapper mapper;
+
+    public UserResponse login(final LoginRequest request) {
         User user = repository.findByEmail(request.getEmail());
 
         if (isNull(user)) {
@@ -27,6 +32,6 @@ public class LoginService {
             throw new BusinessValidationException("Credenciais inválidas.");
         }
 
-        return "Autenticado";
+        return mapper.toUserResponse(user);
     }
 }

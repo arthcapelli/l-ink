@@ -22,11 +22,10 @@ export function LoginScreen() {
       return
     }
 
-    const token = await login(email, password)
+    const userResponse = await login(email, password)
 
-    if (token) {
-      const user = { token }
-      setUser(user)
+    if (userResponse) {
+      setUser(userResponse)
 
       history.push(ROUTES.HOME)
     }

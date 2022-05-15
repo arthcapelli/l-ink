@@ -1,6 +1,7 @@
 package br.com.tcc.link.web.authentication;
 
 import br.com.tcc.link.representation.request.authentication.LoginRequest;
+import br.com.tcc.link.representation.response.user.UserResponse;
 import br.com.tcc.link.service.authentication.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,7 +16,7 @@ public class AuthenticationController {
 
     @PostMapping("login")
     @ResponseStatus(HttpStatus.OK)
-    public String login(@RequestBody final LoginRequest request) {
+    public UserResponse login(@RequestBody final LoginRequest request) {
         return loginService.login(request);
     }
 }
