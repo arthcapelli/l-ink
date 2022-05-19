@@ -24,6 +24,8 @@ public class UserMapper {
                 .id(user.getId())
                 .name(user.getName())
                 .avatar(user.getAvatar())
+                .expTime(user.getExpTime())
+                .isTattooArtist(user.getIsTattooArtist())
                 .build();
     }
 }

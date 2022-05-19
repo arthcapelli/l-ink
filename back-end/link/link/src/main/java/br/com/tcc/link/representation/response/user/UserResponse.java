@@ -14,4 +14,6 @@ public class UserResponse {
     private Integer id;
     private String name;
     private String avatar;
+    private Integer expTime;
+    private boolean isTattooArtist;
 }
