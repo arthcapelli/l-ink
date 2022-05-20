@@ -11,16 +11,18 @@ import java.util.List;
 @Component
 public class PostMapper {
 
+    //Método que realiza conversão de CreatePostRequest para Post, para que o mesmo seja salvo no banco de dados
     public Post toDomain(final CreatePostRequest request) {
-      return Post.builder()
-              .postImg(request.getPostImg())
-              .bodyLocal(request.getBodyLocal())
-              .measures(request.getMeasures())
-              .userId(request.getUserId())
-              .build();
+        return Post.builder()
+                .postImg(request.getPostImg())
+                .bodyLocal(request.getBodyLocal())
+                .measures(request.getMeasures())
+                .userId(request.getUserId())
+                .build();
     }
 
-    public PostResponse toPostResponse(final Post post, final List<String> postTags, final UserResponse userResponse){
+    //Método que realiza conversão de Post para PostResponse, para que o mesmo seja utilizado no front
+    public PostResponse toPostResponse(final Post post, final List<String> postTags, final UserResponse userResponse) {
         return PostResponse.builder()
                 .id(post.getId())
                 .postImg(post.getPostImg())

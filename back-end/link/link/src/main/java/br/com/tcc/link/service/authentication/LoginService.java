@@ -21,11 +21,13 @@ public class LoginService {
     @Autowired
     private UserMapper mapper;
 
+    //Método que recebe LoginRequest como parâmetro de modo a validar se o email inserido pertence a algum usuário
+    // cadastrado e também realiza a validação se a senha inserida pertence ao usuário já cadastrado
     public UserResponse login(final LoginRequest request) {
         User user = repository.findByEmail(request.getEmail());
 
         if (isNull(user)) {
-           throw new NotFoundException("Email não registrado na base.");
+            throw new NotFoundException("Email não registrado na base.");
         }
 
         if (!request.getPassword().equals(user.getPassword())) {

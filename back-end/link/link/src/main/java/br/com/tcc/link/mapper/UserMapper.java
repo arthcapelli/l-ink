@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserMapper {
 
+    //Método que realiza conversão de CreateUserRequest para User, para que o mesmo seja salvo no banco de dados
     public User toDomain(final CreateUserRequest request) {
         return User.builder()
                 .name(request.getName())
@@ -19,6 +20,7 @@ public class UserMapper {
                 .build();
     }
 
+    //Método que realiza conversão de User para UserResponse, para que o mesmo seja utilizado no front
     public UserResponse toUserResponse(final User user) {
         return UserResponse.builder()
                 .id(user.getId())
