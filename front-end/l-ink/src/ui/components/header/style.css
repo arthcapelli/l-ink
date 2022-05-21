@@ -5,23 +5,28 @@
     justify-content: space-between;
     align-items: center;
     padding: 20px;
-    background-color: #a6868923;
+    background-color: #F3EEEF;
+    z-index: 99;
 }
 
 .logo-header {
     width: 25%;
 }
 
-.avatar {
-    width: 50%;
-    border-radius: 15px;
-}
-
 .header-user{
-    width: 35%;
+    width: 50%;
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.img-header{
+    width: 18%;
+}
+
+.avatar {
+    width: 35%;
+    border-radius: 15px;
 }
 
 .header-anonymous{

@@ -40,10 +40,29 @@ const useLinkApi = () => {
     return tags;
   };
 
+  const createPost = async (
+    postImg,
+    bodyLocal,
+    measures,
+    userId,
+    postTags
+  ) => {
+    const response = await post(`post/criar-post`, {
+      postImg,
+      bodyLocal,
+      measures,
+      userId,
+      postTags
+    });
+
+    return response;
+  };
+
   return {
     createUser,
     login,
     getTags,
+    createPost
   };
 };
 

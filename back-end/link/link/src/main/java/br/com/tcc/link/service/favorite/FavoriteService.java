@@ -7,6 +7,7 @@ import br.com.tcc.link.representation.request.favorite.CreateFavoriteRequest;
 import br.com.tcc.link.service.post.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class FavoriteService {
@@ -15,19 +16,17 @@ public class FavoriteService {
     private FavoriteRepository repository;
 
     @Autowired
-    private PostService postService;
-
-    @Autowired
     private FavoriteMapper mapper;
 
     //Método que recebe CreateFavoriteRequest como parâmetro e verifica se o post relacionado já está favoritado.
     //Se sim, ele remove o Favorite, se não ele cria o mesmo e salva no banco
+    @Transactional
     public void favoritePost(CreateFavoriteRequest request) {
 
-        boolean existsPost = postService.existsById(request.getPostId());
+        boolean existsFavorite = repository.existsByUserIdAndPostId(request.getUserId(), request.getPostId());
 
-        if (existsPost) {
-            removeFavorite(request.getPostId());
+        if (existsFavorite) {
+            removeFavorite(request.getUserId(), request.getPostId());
         } else {
             Favorite favorite = mapper.toDomain(request);
             repository.save(favorite);
@@ -35,7 +34,7 @@ public class FavoriteService {
     }
 
     //Método que realiza a remoção do Favorite do banco de dados
-    private void removeFavorite(Integer favoriteId) {
-        repository.deleteByPostId(favoriteId);
+    private void removeFavorite(Integer userId, Integer postId) {
+        repository.deleteByUserIdAndPostId(userId, postId);
     }
 }

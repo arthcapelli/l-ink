@@ -1,0 +1,26 @@
+.create-post-img {
+    height: 35%;
+    object-fit: contain;
+}
+
+.create-post-screen {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+
+  .create-post-content {
+    height: 40vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .create-post-middle {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  

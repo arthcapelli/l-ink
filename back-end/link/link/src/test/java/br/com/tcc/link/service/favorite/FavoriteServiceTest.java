@@ -25,37 +25,34 @@ public class FavoriteServiceTest {
     private FavoriteService service;
 
     @Mock
-    private PostService postService;
-
-    @Mock
     private FavoriteMapper mapper;
 
     @Mock
     private FavoriteRepository repository;
 
     @Test
-    public void favoritePostWithSuccess(){
+    public void favoritePostWithSuccess() {
         CreateFavoriteRequest request = makeRandomCreateFavoriteRequest();
         Favorite favorite = makeRandomFavorite(request.getPostId(), request.getUserId());
 
-        when(postService.existsById(request.getPostId())).thenReturn(false);
-       when(mapper.toDomain(request)).thenReturn(favorite);
-
-       service.favoritePost(request);
-
-       verify(repository).save(favorite);
-    }
-
-    @Test
-    public void removeFavoritePostWithSuccess(){
-        CreateFavoriteRequest request = makeRandomCreateFavoriteRequest();
-        Favorite favorite = makeRandomFavorite(request.getPostId(), request.getUserId());
-
-        when(postService.existsById(request.getPostId())).thenReturn(true);
+        when(repository.existsByUserIdAndPostId(request.getUserId(), request.getPostId())).thenReturn(false);
+        when(mapper.toDomain(request)).thenReturn(favorite);
 
         service.favoritePost(request);
 
-        verify(repository).deleteByPostId(favorite.getPostId());
+        verify(repository).save(favorite);
+    }
+
+    @Test
+    public void removeFavoritePostWithSuccess() {
+        CreateFavoriteRequest request = makeRandomCreateFavoriteRequest();
+        Favorite favorite = makeRandomFavorite(request.getPostId(), request.getUserId());
+
+        when(repository.existsByUserIdAndPostId(request.getUserId(), request.getPostId())).thenReturn(true);
+
+        service.favoritePost(request);
+
+        verify(repository).deleteByUserIdAndPostId(favorite.getUserId(), favorite.getPostId());
     }
 
 }

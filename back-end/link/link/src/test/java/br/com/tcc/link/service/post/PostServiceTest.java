@@ -87,11 +87,12 @@ public class PostServiceTest {
     public void createPostWithSuccess() {
         when(mapper.toDomain(createPostRequest)).thenReturn(post);
 
-        service.create(createPostRequest);
+        String response = service.create(createPostRequest);
 
         verify(repository).save(post);
 
         createPostRequest.getPostTags().forEach(tag -> verify(postTagService).save(tag, post.getId()));
+        assertEquals("Post criado!", response);
     }
 
     @Test
@@ -129,7 +130,7 @@ public class PostServiceTest {
     }
 
     @Test
-    public void verifyPostExistsByIdWithSuccess(){
+    public void verifyPostExistsByIdWithSuccess() {
         when(repository.existsById(post.getId())).thenReturn(true);
 
         boolean response = service.existsById(post.getId());

@@ -39,12 +39,14 @@ public class PostService {
     private UserService userService;
 
     //Método que realiza a adição do Post no banco de dados e das suas respectivas Tags
-    public void create(final CreatePostRequest request) {
+    public String create(final CreatePostRequest request) {
         Post post = mapper.toDomain(request);
 
         repository.save(post);
 
         request.getPostTags().forEach(tag -> postTagService.save(tag, post.getId()));
+
+        return "Post criado!";
     }
 
     //Método para deleção do Post e de suas Tags, tendo como referência o seu postId
@@ -70,7 +72,7 @@ public class PostService {
     }
 
     //Método que recebe um postId como parâmetro e verifica se o mesmo existe no banco de dados
-    public boolean existsById(Integer postId){
+    public boolean existsById(Integer postId) {
         return repository.existsById(postId);
     }
 }

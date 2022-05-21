@@ -13,4 +13,8 @@ public interface FavoriteRepository extends CrudRepository<Favorite, Integer> {
     List<Favorite> getAllByUserId(Integer idUser);
 
     void deleteByPostId(Integer idPost);
+
+    boolean existsByUserIdAndPostId(Integer userId, Integer postId);
+
+    void deleteByUserIdAndPostId(Integer userId, Integer postId);
 }
