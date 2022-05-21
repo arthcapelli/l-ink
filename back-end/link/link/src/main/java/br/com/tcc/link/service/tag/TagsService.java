@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 @Service
 public class TagsService {
 
+    //Método que retorna a descrição de todas as Tags presentes no Enum StyleTags
     public List<String> getAllTags() {
         return Arrays.stream(StyleTags.values())
                 .map(StyleTags::getDescription)

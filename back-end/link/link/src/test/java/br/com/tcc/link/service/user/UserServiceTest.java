@@ -6,6 +6,7 @@ import br.com.tcc.link.exception.BusinessValidationException;
 import br.com.tcc.link.mapper.UserMapper;
 import br.com.tcc.link.repository.UserRepository;
 import br.com.tcc.link.representation.request.user.CreateUserRequest;
+import br.com.tcc.link.representation.response.user.UserResponse;
 import br.com.tcc.link.service.tag.UserTagService;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,6 +22,7 @@ import java.util.stream.Collectors;
 import static br.com.tcc.link.fixture.CreateUserRequestFixture.makeRandomCreateUserRequest;
 import static br.com.tcc.link.fixture.CreateUserRequestFixture.makeValidCreateUserRequest;
 import static br.com.tcc.link.fixture.UserFixture.makeRandomUser;
+import static br.com.tcc.link.fixture.UserResponseFixture.makeRandomUserResponse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
@@ -117,5 +119,24 @@ public class UserServiceTest {
         assertEquals(user.getExpTime(), response.getExpTime());
         assertEquals(user.getIsTattooArtist(), response.getIsTattooArtist());
         assertEquals(user.getPassword(), response.getPassword());
+    }
+
+    @Test
+    public void getUserByIdWithSuccess(){
+        List<String> userTags = List.of("Blackwork");
+        UserResponse userResponse = makeRandomUserResponse(userTags);
+
+        when(repository.findUserById(user.getId())).thenReturn(user);
+        when(userTagService.findAllByUserId(user.getId())).thenReturn(userTags);
+        when(mapper.toUserResponse(user, userTags)).thenReturn(userResponse);
+
+        UserResponse response = service.getUserById(user.getId());
+
+        assertEquals(userResponse.getId(), response.getId());
+        assertEquals(userResponse.getName(), response.getName());
+        assertEquals(userResponse.getAvatar(), response.getAvatar());
+        assertEquals(userResponse.getExpTime(), response.getExpTime());
+        assertEquals(userResponse.isTattooArtist(), response.isTattooArtist());
+        assertEquals(userTags, response.getUserTags());
     }
 }

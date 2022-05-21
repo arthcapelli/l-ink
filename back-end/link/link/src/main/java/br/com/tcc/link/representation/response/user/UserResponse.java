@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Getter
 @Builder
 @AllArgsConstructor
@@ -16,4 +18,5 @@ public class UserResponse {
     private String avatar;
     private Integer expTime;
     private boolean isTattooArtist;
+    private List<String> userTags;
 }

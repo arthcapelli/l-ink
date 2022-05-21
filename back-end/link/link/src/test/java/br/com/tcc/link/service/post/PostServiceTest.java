@@ -10,6 +10,7 @@ import br.com.tcc.link.representation.request.post.CreatePostRequest;
 import br.com.tcc.link.representation.response.post.PostResponse;
 import br.com.tcc.link.representation.response.user.UserResponse;
 import br.com.tcc.link.service.tag.PostTagService;
+import br.com.tcc.link.service.tag.UserTagService;
 import br.com.tcc.link.service.user.UserService;
 import org.junit.Before;
 import org.junit.Test;
@@ -29,6 +30,7 @@ import static br.com.tcc.link.fixture.UserFixture.makeRandomUser;
 import static br.com.tcc.link.fixture.UserResponseFixture.makeRandomUserResponse;
 import static java.util.Arrays.asList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -51,6 +53,9 @@ public class PostServiceTest {
     private PostTagService postTagService;
 
     @Mock
+    private UserTagService userTagService;
+
+    @Mock
     private UserService userService;
 
     User user;
@@ -66,7 +71,8 @@ public class PostServiceTest {
 
         post = makeRandomPost(user.getId());
 
-        userResponse = makeRandomUserResponse();
+        List<String> userTags = List.of("Blackwork");
+        userResponse = makeRandomUserResponse(userTags);
 
         postTags = Arrays.stream(StyleTags.values())
                 .map(StyleTags::getDescription)
@@ -102,10 +108,12 @@ public class PostServiceTest {
     @Test
     public void returnAllPostsResponsesWithSuccess() {
         List<Post> postList = asList(post);
+        List<String> userTags = List.of("Blackwork");
 
         when(repository.findAll()).thenReturn(postList);
         when(userService.findById(post.getUserId())).thenReturn(user);
-        when(userMapper.toUserResponse(user)).thenReturn(userResponse);
+        when(userTagService.findAllByUserId(user.getId())).thenReturn(userTags);
+        when(userMapper.toUserResponse(user, userTags)).thenReturn(userResponse);
         when(postTagService.findAllByPostId(post.getId())).thenReturn(postTags);
         when(mapper.toPostResponse(post, postTags, userResponse)).thenReturn(postResponse);
 
@@ -118,5 +126,14 @@ public class PostServiceTest {
         for (int i = 0; i < postTags.size(); i++) {
             assertEquals(postTags.get(i), response.get(0).getPostTags().get(i));
         }
+    }
+
+    @Test
+    public void verifyPostExistsByIdWithSuccess(){
+        when(repository.existsById(post.getId())).thenReturn(true);
+
+        boolean response = service.existsById(post.getId());
+
+        assertTrue(response);
     }
 }

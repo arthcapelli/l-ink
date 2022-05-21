@@ -20,16 +20,25 @@
 }
 
 .register-user-content {
-  height: 78vh;
+  height: 85vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
-.register-user-select-label {
+.register-user-login-label{
+  margin: 0;
+}
+
+.register-user-select {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.register-user-select-label{
+  margin: 15px 0 0 0;
 }
 
 .register-user-btn-label {
