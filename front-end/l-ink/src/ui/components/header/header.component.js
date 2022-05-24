@@ -1,21 +1,27 @@
-import { ButtonFunction, ButtonLink } from "../../components"
-import { ROUTES } from "../../../constants"
-import { useGlobalUser } from "../../../context"
-import { useHistory } from "react-router-dom"
-import "./style.css"
-import logo from "../../../assets/images/logo.png"
+import { ButtonFunction, ButtonLink } from "../../components";
+import { ROUTES } from "../../../constants";
+import { useGlobalUser } from "../../../context";
+import { useHistory } from "react-router-dom";
+import "./style.css";
+import logo from "../../../assets/images/logo.png";
+import logout from "../../../assets/icons/logout.png";
+import create_post from "../../../assets/icons/add-post.png";
 
 export function Header() {
-  const [user, setUser] = useGlobalUser()
-  const history = useHistory()
+  const [user, setUser] = useGlobalUser();
+  const history = useHistory();
 
   function handleLogout() {
-    setUser({})
-    history.push(ROUTES.HOME)
+    setUser({});
+    history.push(ROUTES.HOME);
   }
 
   function goHome() {
-    history.push(ROUTES.HOME)
+    history.push(ROUTES.HOME);
+  }
+
+  function goPost() {
+    history.push(ROUTES.CREATE_POST);
   }
 
   return (
@@ -23,11 +29,8 @@ export function Header() {
       <img onClick={goHome} src={logo} className="logo-header"></img>
       {user?.id ? (
         <div className="header-user">
-          <ButtonFunction
-            onClick={handleLogout}
-            isSecondary={true}
-            name="Sair"
-          ></ButtonFunction>
+          <img onClick={goPost} src={create_post} className="img-header"></img>
+          <img onClick={handleLogout} src={logout} className="img-header"></img>
           <img src={user.avatar} className="avatar"></img>
         </div>
       ) : (
@@ -45,5 +48,5 @@ export function Header() {
         </div>
       )}
     </div>
-  )
+  );
 }

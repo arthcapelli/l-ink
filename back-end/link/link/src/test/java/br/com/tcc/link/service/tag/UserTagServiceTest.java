@@ -12,9 +12,14 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import static org.apache.commons.lang3.RandomUtils.nextInt;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UserTagServiceTest {
@@ -30,6 +35,7 @@ public class UserTagServiceTest {
 
     Integer idUser;
     String tagName;
+    List<UserTag> userTags;
 
     @Before
     public void setUp() {
@@ -37,6 +43,9 @@ public class UserTagServiceTest {
 
         StyleTags[] styleTags = StyleTags.values();
         tagName = styleTags[nextInt(0, styleTags.length)].getDescription();
+        userTags = Arrays.stream(StyleTags.values())
+                .map(tag -> UserTag.builder().tagName(tag.getDescription()).id(nextInt()).userId(nextInt()).build())
+                .collect(Collectors.toList());
     }
 
     @Test
@@ -50,5 +59,17 @@ public class UserTagServiceTest {
 
         assertEquals(idUser, userTag.getUserId());
         assertEquals(tagName, userTag.getTagName());
+    }
+
+    @Test
+    public void returnAllTagsByUserIdWithSuccess(){
+
+        when(repository.findAllByUserId(idUser)).thenReturn(userTags);
+
+        List<String> response = service.findAllByUserId(idUser);
+
+        for (int i = 0; i < userTags.size(); i++) {
+            assertEquals(userTags.get(i).getTagName(), response.get(i));
+        }
     }
 }

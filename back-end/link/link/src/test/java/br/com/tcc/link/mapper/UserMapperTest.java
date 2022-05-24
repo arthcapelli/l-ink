@@ -7,6 +7,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.util.List;
+
 import static br.com.tcc.link.fixture.CreateUserRequestFixture.makeRandomCreateUserRequest;
 import static br.com.tcc.link.fixture.UserFixture.makeRandomUser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -32,7 +34,8 @@ public class UserMapperTest {
     @Test
     public void userDomainToUserResponse() {
         User randomUser = makeRandomUser();
-        UserResponse userResponse = mapper.toUserResponse(randomUser);
+        List<String> userTags = List.of("Blackwork");
+        UserResponse userResponse = mapper.toUserResponse(randomUser, userTags);
 
         assertEquals(userResponse.getId(), randomUser.getId());
         assertEquals(userResponse.getName(), randomUser.getName());
@@ -40,5 +43,6 @@ public class UserMapperTest {
         assertEquals(userResponse.getAvatar(), randomUser.getAvatar());
         assertEquals(userResponse.isTattooArtist(), randomUser.getIsTattooArtist());
         assertEquals(userResponse.getExpTime(), randomUser.getExpTime());
+        assertEquals(userResponse.getUserTags(), userTags);
     }
 }

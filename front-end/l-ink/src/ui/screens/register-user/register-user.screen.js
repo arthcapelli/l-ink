@@ -3,24 +3,24 @@ import {
   ButtonFunction,
   ButtonLink,
   MultipleSelectChip,
-} from '../../components';
-import { useLinkApi } from '../../../api';
-import { useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import { ROUTES } from '../../../constants';
-import { useToast } from '../../../hooks';
-import Switch from '@material-ui/core/Switch';
-import './style.css';
-import logo from '../../../assets/images/logo.png';
-import { useGlobalUser } from '../../../context';
+} from "../../components";
+import { useLinkApi } from "../../../api";
+import { useState } from "react";
+import { useHistory } from "react-router-dom";
+import { ROUTES } from "../../../constants";
+import { useToast } from "../../../hooks";
+import Switch from "@material-ui/core/Switch";
+import "./style.css";
+import logo from "../../../assets/images/logo.png";
+import { useGlobalUser } from "../../../context";
 
 export function RegisterUserScreen() {
   const { showErrorToast } = useToast();
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [avatar, setAvatar] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [avatar, setAvatar] = useState("");
   const [isTattooArtist, setIsTattooArtist] = useState(false);
   const [expTime, setExpTime] = useState(0);
   const [userTags, setUserTags] = useState([]);
@@ -31,7 +31,7 @@ export function RegisterUserScreen() {
   async function register() {
     if (!name.length || !password.length) {
       showErrorToast(
-        'Faltam dados para o cadastro, escolha uma senha e um nome de usuário'
+        "Faltam dados para o cadastro, escolha uma senha e um nome de usuário"
       );
       return;
     }
@@ -101,14 +101,16 @@ export function RegisterUserScreen() {
           label="Imagem de perfil (url)"
         />
 
-        <MultipleSelectChip setUserTags={setUserTags} />
+        <MultipleSelectChip setStyleTags={setUserTags} />
 
-        <div className="register-user-select-label">
-          <p className="secondary-color">É tatuador?</p>
+        <div className="register-user-select">
+          <p className="register-user-select-label secondary-color">
+            É tatuador?
+          </p>
           <Switch
             checked={isTattooArtist}
             onChange={() => setIsTattooArtist(!isTattooArtist)}
-            style={{ color: '#a68689' }}
+            style={{ color: "#a68689" }}
           />
           {isTattooArtist ? (
             <Input
@@ -119,18 +121,18 @@ export function RegisterUserScreen() {
               label="Tempo de experiência (anos)"
             />
           ) : (
-            ''
+            ""
           )}
         </div>
 
         <div>
           <ButtonFunction
-            name={'CADASTRAR'}
+            name={"CADASTRAR"}
             onClick={handleSubmit}
           ></ButtonFunction>
 
           <div className="register-user-btn-label">
-            <p>Já possui cadastro?</p>
+            <p className="register-user-login-label">Já possui cadastro?</p>
             <ButtonLink
               isSecondary
               path={ROUTES.LOGIN}

@@ -18,8 +18,8 @@ public class PostController {
 
     @PostMapping("criar-post")
     @ResponseStatus(HttpStatus.CREATED)
-    public void createPost(@RequestBody final CreatePostRequest request) {
-        postService.create(request);
+    public String createPost(@RequestBody final CreatePostRequest request) {
+        return postService.create(request);
     }
 
     @DeleteMapping("deletar-post/{postId}")

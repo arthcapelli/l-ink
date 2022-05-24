@@ -22,4 +22,10 @@ public class Favorite {
     private Integer postId;
 
     private Integer userId;
+
+
+    public Favorite(Integer postId, Integer userId) {
+        this.postId = postId;
+        this.userId = userId;
+    }
 }

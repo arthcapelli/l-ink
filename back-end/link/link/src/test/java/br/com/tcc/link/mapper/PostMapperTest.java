@@ -37,19 +37,19 @@ public class PostMapperTest {
 
     @Test
     public void postDomainToPostResponse() {
-        List<String> postTags = List.of("Blackwork");
-        UserResponse userResponse = makeRandomUserResponse();
+        List<String> tags = List.of("Blackwork");
+        UserResponse userResponse = makeRandomUserResponse(tags);
         Integer userId = userResponse.getId();
 
         Post post = makeRandomPost(userId);
-        PostResponse postResponse = mapper.toPostResponse(post, postTags, userResponse);
+        PostResponse postResponse = mapper.toPostResponse(post, tags, userResponse);
 
         assertEquals(postResponse.getId(), post.getId());
         assertEquals(postResponse.getPostImg(), post.getPostImg());
         assertEquals(postResponse.getBodyLocal(), post.getBodyLocal());
         assertEquals(postResponse.getMeasures(), post.getMeasures());
         assertEquals(postResponse.getUserResponse().getId(), post.getUserId());
-        assertEquals(postResponse.getPostTags(), postTags);
+        assertEquals(postResponse.getPostTags(), tags);
 
     }
 }

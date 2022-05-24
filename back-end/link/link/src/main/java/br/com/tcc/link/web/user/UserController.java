@@ -20,4 +20,11 @@ public class UserController {
     public UserResponse createUser(@RequestBody final CreateUserRequest request) {
         return userService.create(request);
     }
+
+    @GetMapping("{userId}")
+    @ResponseStatus(HttpStatus.OK)
+    public UserResponse getUserById(@PathVariable Integer userId) {
+        return userService.getUserById(userId);
+    }
+
 }

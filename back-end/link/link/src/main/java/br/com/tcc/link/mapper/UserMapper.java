@@ -5,6 +5,8 @@ import br.com.tcc.link.representation.request.user.CreateUserRequest;
 import br.com.tcc.link.representation.response.user.UserResponse;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class UserMapper {
 
@@ -21,13 +23,14 @@ public class UserMapper {
     }
 
     //Método que realiza conversão de User para UserResponse, para que o mesmo seja utilizado no front
-    public UserResponse toUserResponse(final User user) {
+    public UserResponse toUserResponse(final User user, List<String> userTags) {
         return UserResponse.builder()
                 .id(user.getId())
                 .name(user.getName())
                 .avatar(user.getAvatar())
                 .expTime(user.getExpTime())
                 .isTattooArtist(user.getIsTattooArtist())
+                .userTags(userTags)
                 .build();
     }
 }
