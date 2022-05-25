@@ -1,0 +1,18 @@
+/* .feed-card-content{width: 100%;} */
+/* .feed-card-img{width: 100%;} */
+.card-img {
+    max-width: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+.feed-card-info{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+    background: #59081ec6;
+}
+.feed-card-icon{}
+.icon-img {
+    width: 10%;}
+.feed-card-author{}
