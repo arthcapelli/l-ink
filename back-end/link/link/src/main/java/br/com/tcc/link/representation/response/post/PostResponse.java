@@ -20,4 +20,5 @@ public class PostResponse {
     private String measures;
     private UserResponse userResponse;
     private List<String> postTags;
+    private Boolean isFavorite;
 }

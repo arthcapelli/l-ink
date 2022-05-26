@@ -22,7 +22,7 @@ public class PostMapper {
     }
 
     //Método que realiza conversão de Post para PostResponse, para que o mesmo seja utilizado no front
-    public PostResponse toPostResponse(final Post post, final List<String> postTags, final UserResponse userResponse) {
+    public PostResponse toPostResponse(final Post post, final List<String> postTags, final UserResponse userResponse, final Boolean isFavorite) {
         return PostResponse.builder()
                 .id(post.getId())
                 .postImg(post.getPostImg())
@@ -30,6 +30,7 @@ public class PostMapper {
                 .measures(post.getMeasures())
                 .userResponse(userResponse)
                 .postTags(postTags)
+                .isFavorite(isFavorite)
                 .build();
     }
 }

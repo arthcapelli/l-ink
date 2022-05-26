@@ -14,6 +14,7 @@ import static br.com.tcc.link.fixture.CreatePostRequestFixture.makeRandomCreateP
 import static br.com.tcc.link.fixture.PostFixture.makeRandomPost;
 import static br.com.tcc.link.fixture.UserResponseFixture.makeRandomUserResponse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PostMapperTest {
@@ -42,7 +43,7 @@ public class PostMapperTest {
         Integer userId = userResponse.getId();
 
         Post post = makeRandomPost(userId);
-        PostResponse postResponse = mapper.toPostResponse(post, tags, userResponse);
+        PostResponse postResponse = mapper.toPostResponse(post, tags, userResponse, Boolean.TRUE);
 
         assertEquals(postResponse.getId(), post.getId());
         assertEquals(postResponse.getPostImg(), post.getPostImg());
@@ -50,6 +51,7 @@ public class PostMapperTest {
         assertEquals(postResponse.getMeasures(), post.getMeasures());
         assertEquals(postResponse.getUserResponse().getId(), post.getUserId());
         assertEquals(postResponse.getPostTags(), tags);
+        assertTrue(postResponse.getIsFavorite());
 
     }
 }

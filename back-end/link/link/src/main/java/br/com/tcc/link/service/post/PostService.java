@@ -8,6 +8,7 @@ import br.com.tcc.link.repository.PostRepository;
 import br.com.tcc.link.representation.request.post.CreatePostRequest;
 import br.com.tcc.link.representation.response.post.PostResponse;
 import br.com.tcc.link.representation.response.user.UserResponse;
+import br.com.tcc.link.service.favorite.FavoriteService;
 import br.com.tcc.link.service.tag.PostTagService;
 import br.com.tcc.link.service.tag.UserTagService;
 import br.com.tcc.link.service.user.UserService;
@@ -38,6 +39,9 @@ public class PostService {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private FavoriteService favoriteService;
+
     //Método que realiza a adição do Post no banco de dados e das suas respectivas Tags
     public String create(final CreatePostRequest request) {
         Post post = mapper.toDomain(request);
@@ -57,7 +61,7 @@ public class PostService {
     }
 
     //Método que retorna a lista de todos os posts salvos no banco de dados, associados às suas respectivas Tags
-    public List<PostResponse> getAllPosts() {
+    public List<PostResponse> getAllPosts(final Integer authUserId) {
         List<Post> postList = (List<Post>) repository.findAll();
 
         return postList.stream()
@@ -65,8 +69,10 @@ public class PostService {
                     User user = userService.findById(post.getUserId());
                     List<String> userTags = userTagService.findAllByUserId(post.getUserId());
                     UserResponse userResponse = userMapper.toUserResponse(user, userTags);
+                    Boolean isFavorite = favoriteService.existsFavorite(authUserId, post.getId());
 
-                    return mapper.toPostResponse(post, postTagService.findAllByPostId(post.getId()), userResponse);
+                    return mapper.toPostResponse(post,
+                            postTagService.findAllByPostId(post.getId()), userResponse, isFavorite);
                 })
                 .collect(Collectors.toList());
     }

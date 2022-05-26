@@ -30,7 +30,7 @@ public class PostController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<PostResponse> getAllPosts() {
-        return postService.getAllPosts();
+    public List<PostResponse> getAllPosts(@RequestParam Integer authUserId) {
+        return postService.getAllPosts(authUserId);
     }
 }

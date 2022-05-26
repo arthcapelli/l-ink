@@ -10,7 +10,7 @@ import static org.apache.commons.lang3.RandomUtils.nextInt;
 
 public class PostResponseFixture {
 
-    public static PostResponse makeRandomPostResponse(final UserResponse userResponse, final List<String> postTags) {
+    public static PostResponse makeRandomPostResponse(final UserResponse userResponse, final List<String> postTags, final Boolean isFavorite) {
         return PostResponse.builder()
                 .id(nextInt())
                 .postImg(randomAlphabetic(10))
@@ -18,6 +18,7 @@ public class PostResponseFixture {
                 .measures(randomAlphabetic(10))
                 .userResponse(userResponse)
                 .postTags(postTags)
+                .isFavorite(isFavorite)
                 .build();
     }
 }

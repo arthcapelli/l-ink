@@ -9,6 +9,7 @@ import br.com.tcc.link.repository.PostRepository;
 import br.com.tcc.link.representation.request.post.CreatePostRequest;
 import br.com.tcc.link.representation.response.post.PostResponse;
 import br.com.tcc.link.representation.response.user.UserResponse;
+import br.com.tcc.link.service.favorite.FavoriteService;
 import br.com.tcc.link.service.tag.PostTagService;
 import br.com.tcc.link.service.tag.UserTagService;
 import br.com.tcc.link.service.user.UserService;
@@ -29,6 +30,7 @@ import static br.com.tcc.link.fixture.PostResponseFixture.makeRandomPostResponse
 import static br.com.tcc.link.fixture.UserFixture.makeRandomUser;
 import static br.com.tcc.link.fixture.UserResponseFixture.makeRandomUserResponse;
 import static java.util.Arrays.asList;
+import static org.apache.commons.lang3.RandomUtils.nextInt;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.verify;
@@ -58,6 +60,9 @@ public class PostServiceTest {
     @Mock
     private UserService userService;
 
+    @Mock
+    private FavoriteService favoriteService;
+
     User user;
     Post post;
     CreatePostRequest createPostRequest;
@@ -78,7 +83,7 @@ public class PostServiceTest {
                 .map(StyleTags::getDescription)
                 .collect(Collectors.toList());
 
-        postResponse = makeRandomPostResponse(userResponse, postTags);
+        postResponse = makeRandomPostResponse(userResponse, postTags, Boolean.TRUE);
 
         createPostRequest = makeRandomCreatePostRequest(user.getId(), postTags);
     }
@@ -108,6 +113,7 @@ public class PostServiceTest {
 
     @Test
     public void returnAllPostsResponsesWithSuccess() {
+        Integer authUserId = nextInt();
         List<Post> postList = asList(post);
         List<String> userTags = List.of("Blackwork");
 
@@ -116,9 +122,10 @@ public class PostServiceTest {
         when(userTagService.findAllByUserId(user.getId())).thenReturn(userTags);
         when(userMapper.toUserResponse(user, userTags)).thenReturn(userResponse);
         when(postTagService.findAllByPostId(post.getId())).thenReturn(postTags);
-        when(mapper.toPostResponse(post, postTags, userResponse)).thenReturn(postResponse);
+        when(favoriteService.existsFavorite(authUserId, post.getId())).thenReturn(Boolean.TRUE);
+        when(mapper.toPostResponse(post, postTags, userResponse, Boolean.TRUE)).thenReturn(postResponse);
 
-        List<PostResponse> response = service.getAllPosts();
+        List<PostResponse> response = service.getAllPosts(authUserId);
 
         assertEquals(postResponse.getId(), response.get(0).getId());
         assertEquals(postResponse.getPostImg(), response.get(0).getPostImg());
@@ -127,6 +134,7 @@ public class PostServiceTest {
         for (int i = 0; i < postTags.size(); i++) {
             assertEquals(postTags.get(i), response.get(0).getPostTags().get(i));
         }
+        assertEquals(postResponse.getIsFavorite(), response.get(0).getIsFavorite());
     }
 
     @Test
