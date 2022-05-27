@@ -62,7 +62,7 @@ public class PostService {
 
     //Método que retorna a lista de todos os posts salvos no banco de dados, associados às suas respectivas Tags
     public List<PostResponse> getAllPosts(final Integer authUserId) {
-        List<Post> postList = (List<Post>) repository.findAll();
+        List<Post> postList = repository.findAllByOrderByIdDesc();
 
         return postList.stream()
                 .map(post -> {

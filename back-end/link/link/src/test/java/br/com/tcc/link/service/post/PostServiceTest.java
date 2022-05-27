@@ -117,7 +117,7 @@ public class PostServiceTest {
         List<Post> postList = asList(post);
         List<String> userTags = List.of("Blackwork");
 
-        when(repository.findAll()).thenReturn(postList);
+        when(repository.findAllByOrderByIdDesc()).thenReturn(postList);
         when(userService.findById(post.getUserId())).thenReturn(user);
         when(userTagService.findAllByUserId(user.getId())).thenReturn(userTags);
         when(userMapper.toUserResponse(user, userTags)).thenReturn(userResponse);
