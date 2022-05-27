@@ -1,8 +1,12 @@
 import "./style.css"
-import heart_blank from "../../../assets/icons/heart-blank.png"
+import { Favorite } from "../favorite/favorite.component"
+import { useState } from "react"
+import { useGlobalUser } from "../../../context"
 
 export function Post({ item }) {
-  const { id, userResponse, postImg } = item
+  const { id, userResponse, postImg, isFavorite } = item
+  const [user] = useGlobalUser()
+  const [favorite, setFavorite] = useState(isFavorite)
 
   return (
     <div className="feed-card-content" key={id}>
@@ -18,7 +22,13 @@ export function Post({ item }) {
           ></img>
           <div>{userResponse.name}</div>
         </div>
-        <img src={heart_blank} alt="heart-icon" className="icon-img"></img>
+        {user?.id && (
+          <Favorite
+            postId={id}
+            isFavorite={favorite}
+            setIsFavorite={setFavorite}
+          />
+        )}
       </div>
     </div>
   )
