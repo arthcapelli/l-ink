@@ -25,7 +25,7 @@ public class Comment {
 
     private String commentText;
 
-    private LocalDateTime createdAt = LocalDateTime.now();
+    private LocalDateTime createdAt;
 
     private Integer postId;
 

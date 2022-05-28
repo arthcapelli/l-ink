@@ -21,7 +21,6 @@ public class PostMapperTest {
 
     private PostMapper mapper = new PostMapper();
 
-
     @Test
     public void createPostRequestToDomain() {
         Integer userId = 1;

@@ -2,6 +2,7 @@ package br.com.tcc.link.mapper;
 
 import br.com.tcc.link.domain.User;
 import br.com.tcc.link.representation.request.user.CreateUserRequest;
+import br.com.tcc.link.representation.response.user.UserCommentResponse;
 import br.com.tcc.link.representation.response.user.UserResponse;
 import org.springframework.stereotype.Component;
 
@@ -31,6 +32,14 @@ public class UserMapper {
                 .expTime(user.getExpTime())
                 .isTattooArtist(user.getIsTattooArtist())
                 .userTags(userTags)
+                .build();
+    }
+
+    public UserCommentResponse toCommentResponse(User user){
+        return UserCommentResponse.builder()
+                .id(user.getId())
+                .avatar(user.getAvatar())
+                .name(user.getName())
                 .build();
     }
 }
