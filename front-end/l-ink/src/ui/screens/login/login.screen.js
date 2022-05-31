@@ -1,40 +1,40 @@
-import { Input, ButtonFunction, ButtonLink } from "../../components"
-import { useLinkApi } from "../../../api"
-import { useState } from "react"
-import { useHistory } from "react-router-dom"
-import { ROUTES } from "../../../constants"
-import { useToast } from "../../../hooks"
-import { useGlobalUser } from "../../../context"
-import "./style.css"
-import logo from "../../../assets/images/logo.png"
+import { Input, ButtonFunction, ButtonLink } from "../../components";
+import { useLinkApi } from "../../../api";
+import { useState } from "react";
+import { useHistory } from "react-router-dom";
+import { ROUTES } from "../../../constants";
+import { useToast } from "../../../hooks";
+import { useGlobalUser } from "../../../context";
+import "./style.css";
+import logo from "../../../assets/images/logo.png";
 
 export function LoginScreen() {
-  const { showErrorToast } = useToast()
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [, setUser] = useGlobalUser()
-  const history = useHistory()
-  const { login } = useLinkApi()
+  const { showErrorToast } = useToast();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [, setUser] = useGlobalUser();
+  const history = useHistory();
+  const { login } = useLinkApi();
 
   async function loginApp() {
     if (!email.length || !password.length) {
-      showErrorToast("Campos devem ser preenchidos")
-      return
+      showErrorToast("Campos devem ser preenchidos");
+      return;
     }
 
-    const userResponse = await login(email, password)
+    const userResponse = await login(email, password);
 
     if (userResponse) {
-      setUser(userResponse)
+      setUser(userResponse);
 
-      history.push(ROUTES.HOME)
+      history.push(ROUTES.HOME);
     }
   }
 
   function handleSubmit(evento) {
-    evento.preventDefault()
+    evento.preventDefault();
 
-    loginApp()
+    loginApp();
   }
 
   return (
@@ -71,8 +71,15 @@ export function LoginScreen() {
               name="REGISTRE-SE"
             ></ButtonLink>
           </div>
+          <div>
+            <ButtonLink
+              isSecondary
+              path={ROUTES.HOME}
+              name="ENTRE SEM LOGAR"
+            ></ButtonLink>
+          </div>
         </div>
       </form>
     </div>
-  )
+  );
 }

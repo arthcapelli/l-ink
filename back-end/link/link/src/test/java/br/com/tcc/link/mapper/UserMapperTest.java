@@ -2,6 +2,7 @@ package br.com.tcc.link.mapper;
 
 import br.com.tcc.link.domain.User;
 import br.com.tcc.link.representation.request.user.CreateUserRequest;
+import br.com.tcc.link.representation.response.user.UserCommentResponse;
 import br.com.tcc.link.representation.response.user.UserResponse;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -37,12 +38,21 @@ public class UserMapperTest {
         List<String> userTags = List.of("Blackwork");
         UserResponse userResponse = mapper.toUserResponse(randomUser, userTags);
 
-        assertEquals(userResponse.getId(), randomUser.getId());
         assertEquals(userResponse.getName(), randomUser.getName());
         assertEquals(userResponse.getId(), randomUser.getId());
         assertEquals(userResponse.getAvatar(), randomUser.getAvatar());
         assertEquals(userResponse.isTattooArtist(), randomUser.getIsTattooArtist());
         assertEquals(userResponse.getExpTime(), randomUser.getExpTime());
         assertEquals(userResponse.getUserTags(), userTags);
+    }
+
+    @Test
+    public void userDomainToUserCommentResponse() {
+        User randomUser = makeRandomUser();
+        UserCommentResponse userCommentResponse = mapper.toCommentResponse(randomUser);
+
+        assertEquals(userCommentResponse.getName(), randomUser.getName());
+        assertEquals(userCommentResponse.getId(), randomUser.getId());
+        assertEquals(userCommentResponse.getAvatar(), randomUser.getAvatar());
     }
 }

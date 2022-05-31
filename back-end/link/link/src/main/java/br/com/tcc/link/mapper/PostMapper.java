@@ -2,6 +2,8 @@ package br.com.tcc.link.mapper;
 
 import br.com.tcc.link.domain.Post;
 import br.com.tcc.link.representation.request.post.CreatePostRequest;
+import br.com.tcc.link.representation.response.comment.CommentResponse;
+import br.com.tcc.link.representation.response.post.PostPageResponse;
 import br.com.tcc.link.representation.response.post.PostResponse;
 import br.com.tcc.link.representation.response.user.UserResponse;
 import org.springframework.stereotype.Component;
@@ -31,6 +33,23 @@ public class PostMapper {
                 .userResponse(userResponse)
                 .postTags(postTags)
                 .isFavorite(isFavorite)
+                .build();
+    }
+
+    public PostPageResponse toPostPageResponse(final Post post,
+                                               final List<String> postTags,
+                                               final UserResponse userResponse,
+                                               final Boolean isFavorite,
+                                               final List<CommentResponse> commentResponse) {
+        return PostPageResponse.builder()
+                .id(post.getId())
+                .postImg(post.getPostImg())
+                .bodyLocal(post.getBodyLocal())
+                .measures(post.getMeasures())
+                .userResponse(userResponse)
+                .postTags(postTags)
+                .isFavorite(isFavorite)
+                .comments(commentResponse)
                 .build();
     }
 }

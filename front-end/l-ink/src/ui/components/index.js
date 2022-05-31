@@ -7,3 +7,4 @@ export { Toast } from "./toast/toast.component";
 export { Header } from "./header/header.component";
 export { Feed } from "./feed/feed.component";
 export { Post } from "./post/post.component";
+export { Comment } from "./comment/comment.component";

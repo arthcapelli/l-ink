@@ -8,6 +8,7 @@ import {
   LoginScreen,
   HomeScreen,
   CreatePostScreen,
+  PostScreen,
 } from "./ui/screens/index";
 import { createTheme, ThemeProvider } from "@material-ui/core/styles";
 import { useGlobalUser } from "./context";
@@ -58,6 +59,9 @@ function App() {
           </Route>
           <PrivateRoute path={ROUTES.CREATE_POST} exact>
             <CreatePostScreen />
+          </PrivateRoute>
+          <PrivateRoute path={ROUTES.POST_PAGE} exact>
+            <PostScreen />
           </PrivateRoute>
           <Route path="/">
             <Redirect to={ROUTES.HOME} />

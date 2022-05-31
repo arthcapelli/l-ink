@@ -1,8 +1,12 @@
 package br.com.tcc.link.mapper;
 
+import br.com.tcc.link.domain.Comment;
 import br.com.tcc.link.domain.Post;
 import br.com.tcc.link.representation.request.post.CreatePostRequest;
+import br.com.tcc.link.representation.response.comment.CommentResponse;
+import br.com.tcc.link.representation.response.post.PostPageResponse;
 import br.com.tcc.link.representation.response.post.PostResponse;
+import br.com.tcc.link.representation.response.user.UserCommentResponse;
 import br.com.tcc.link.representation.response.user.UserResponse;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,9 +14,13 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.List;
 
+import static br.com.tcc.link.fixture.CommentFixture.makeRandomComment;
+import static br.com.tcc.link.fixture.CommentResponseFixture.makeRandomCommentResponse;
 import static br.com.tcc.link.fixture.CreatePostRequestFixture.makeRandomCreatePostRequest;
 import static br.com.tcc.link.fixture.PostFixture.makeRandomPost;
+import static br.com.tcc.link.fixture.UserCommentResponseFixture.makeRandomUserCommentResponse;
 import static br.com.tcc.link.fixture.UserResponseFixture.makeRandomUserResponse;
+import static java.util.Arrays.asList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -44,13 +52,44 @@ public class PostMapperTest {
         Post post = makeRandomPost(userId);
         PostResponse postResponse = mapper.toPostResponse(post, tags, userResponse, Boolean.TRUE);
 
-        assertEquals(postResponse.getId(), post.getId());
-        assertEquals(postResponse.getPostImg(), post.getPostImg());
-        assertEquals(postResponse.getBodyLocal(), post.getBodyLocal());
-        assertEquals(postResponse.getMeasures(), post.getMeasures());
-        assertEquals(postResponse.getUserResponse().getId(), post.getUserId());
-        assertEquals(postResponse.getPostTags(), tags);
+        assertEquals(post.getId(), postResponse.getId());
+        assertEquals(post.getPostImg(), postResponse.getPostImg());
+        assertEquals(post.getBodyLocal(), post.getBodyLocal());
+        assertEquals(post.getMeasures(), post.getMeasures());
+        assertEquals(post.getUserId(), postResponse.getUserResponse().getId());
+        assertEquals(post.getUserId(), postResponse.getUserResponse().getId());
+        assertEquals(tags, postResponse.getPostTags());
+        assertEquals(userResponse.getId(), postResponse.getUserResponse().getId());
+        assertEquals(userResponse.getName(), postResponse.getUserResponse().getName());
+        assertEquals(userResponse.getAvatar(), postResponse.getUserResponse().getAvatar());
+        assertEquals(userResponse.getExpTime(), postResponse.getUserResponse().getExpTime());
+        assertEquals(userResponse.getUserTags(), postResponse.getUserResponse().getUserTags());
         assertTrue(postResponse.getIsFavorite());
+    }
 
+    @Test
+    public void postDomainToPostPageResponse() {
+        List<String> tags = List.of("Blackwork");
+        UserResponse userResponse = makeRandomUserResponse(tags);
+        Integer userId = userResponse.getId();
+        UserCommentResponse userCommentResponse = makeRandomUserCommentResponse();
+        Comment comment = makeRandomComment(userId);
+        List<CommentResponse> commentResponses = asList(makeRandomCommentResponse(comment, userCommentResponse));
+
+        Post post = makeRandomPost(userId);
+        PostPageResponse postPageResponse = mapper.toPostPageResponse(post, tags, userResponse, true, commentResponses);
+
+        assertEquals(post.getId(), postPageResponse.getId());
+        assertEquals(post.getPostImg(), postPageResponse.getPostImg());
+        assertEquals(post.getBodyLocal(), postPageResponse.getBodyLocal());
+        assertEquals(post.getMeasures(), postPageResponse.getMeasures());
+        assertEquals(post.getUserId(), postPageResponse.getUserResponse().getId());
+        assertEquals(tags, postPageResponse.getPostTags());
+        assertEquals(userResponse.getId(), postPageResponse.getUserResponse().getId());
+        assertEquals(userResponse.getName(), postPageResponse.getUserResponse().getName());
+        assertEquals(userResponse.getAvatar(), postPageResponse.getUserResponse().getAvatar());
+        assertEquals(userResponse.getExpTime(), postPageResponse.getUserResponse().getExpTime());
+        assertEquals(userResponse.getUserTags(), postPageResponse.getUserResponse().getUserTags());
+        assertTrue(postPageResponse.getIsFavorite());
     }
 }

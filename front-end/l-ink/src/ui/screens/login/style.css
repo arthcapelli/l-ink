@@ -12,7 +12,7 @@
 }
 
 .login-content {
-    height: 40vh;
+    height: 45vh;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;

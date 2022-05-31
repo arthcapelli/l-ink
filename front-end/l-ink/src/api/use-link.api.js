@@ -1,11 +1,11 @@
-import { useAxios } from "../hooks/index"
+import { useAxios } from "../hooks/index";
 
 const useLinkApi = () => {
-  const DONT_SHOW_LOADER = true
-  const HIDE_LOADER = true
-  const KEEP_LOADER = false
+  const DONT_SHOW_LOADER = true;
+  const HIDE_LOADER = true;
+  const KEEP_LOADER = false;
 
-  const { get, post, put, del } = useAxios()
+  const { get, post, put, del } = useAxios();
 
   const createUser = async (
     email,
@@ -30,10 +30,10 @@ const useLinkApi = () => {
         userTags,
       },
       HIDE_LOADER
-    )
+    );
 
-    return response
-  }
+    return response;
+  };
 
   const login = async (email, password) => {
     const token = await post(
@@ -43,14 +43,14 @@ const useLinkApi = () => {
         password,
       },
       KEEP_LOADER
-    )
-    return token
-  }
+    );
+    return token;
+  };
 
   const getTags = async () => {
-    const tags = await get(`tags`, HIDE_LOADER)
-    return tags
-  }
+    const tags = await get(`tags`, HIDE_LOADER);
+    return tags;
+  };
 
   const createPost = async (postImg, bodyLocal, measures, userId, postTags) => {
     const response = await post(
@@ -63,14 +63,14 @@ const useLinkApi = () => {
         postTags,
       },
       KEEP_LOADER
-    )
-    return response
-  }
+    );
+    return response;
+  };
 
   const getPosts = async (userId) => {
-    const posts = await get(`post?authUserId=${userId}`, HIDE_LOADER)
-    return posts
-  }
+    const posts = await get(`post?authUserId=${userId}`, HIDE_LOADER);
+    return posts;
+  };
 
   const favoritePost = async (postId, userId) => {
     await post(
@@ -81,8 +81,13 @@ const useLinkApi = () => {
       },
       KEEP_LOADER,
       DONT_SHOW_LOADER
-    )
-  }
+    );
+  };
+
+  const getPost = async (postId, userId) => {
+    const post = await get(`post/${postId}?authUserId=${userId}`, HIDE_LOADER);
+    return post;
+  };
 
   return {
     createUser,
@@ -91,7 +96,8 @@ const useLinkApi = () => {
     createPost,
     getPosts,
     favoritePost,
-  }
-}
+    getPost,
+  };
+};
 
-export { useLinkApi }
+export { useLinkApi };

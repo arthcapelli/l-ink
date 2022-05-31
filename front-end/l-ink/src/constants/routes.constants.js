@@ -3,4 +3,5 @@ export const ROUTES = {
   REGISTER_USER: "/register-user",
   HOME: "/home",
   CREATE_POST: "/create-post",
+  POST_PAGE: "/post/:id",
 };

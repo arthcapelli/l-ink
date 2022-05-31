@@ -35,7 +35,8 @@ public class UserMapper {
                 .build();
     }
 
-    public UserCommentResponse toCommentResponse(User user){
+    //Método para converter User para UserCommentResponse, para que o mesmo seja utilizado no front
+    public UserCommentResponse toCommentResponse(User user) {
         return UserCommentResponse.builder()
                 .id(user.getId())
                 .avatar(user.getAvatar())

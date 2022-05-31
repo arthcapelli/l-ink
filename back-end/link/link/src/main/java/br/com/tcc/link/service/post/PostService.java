@@ -6,8 +6,11 @@ import br.com.tcc.link.mapper.PostMapper;
 import br.com.tcc.link.mapper.UserMapper;
 import br.com.tcc.link.repository.PostRepository;
 import br.com.tcc.link.representation.request.post.CreatePostRequest;
+import br.com.tcc.link.representation.response.comment.CommentResponse;
+import br.com.tcc.link.representation.response.post.PostPageResponse;
 import br.com.tcc.link.representation.response.post.PostResponse;
 import br.com.tcc.link.representation.response.user.UserResponse;
+import br.com.tcc.link.service.comment.CommentService;
 import br.com.tcc.link.service.favorite.FavoriteService;
 import br.com.tcc.link.service.tag.PostTagService;
 import br.com.tcc.link.service.tag.UserTagService;
@@ -42,6 +45,9 @@ public class PostService {
     @Autowired
     private FavoriteService favoriteService;
 
+    @Autowired
+    private CommentService commentService;
+
     //Método que realiza a adição do Post no banco de dados e das suas respectivas Tags
     public String create(final CreatePostRequest request) {
         Post post = mapper.toDomain(request);
@@ -66,9 +72,7 @@ public class PostService {
 
         return postList.stream()
                 .map(post -> {
-                    User user = userService.findById(post.getUserId());
-                    List<String> userTags = userTagService.findAllByUserId(post.getUserId());
-                    UserResponse userResponse = userMapper.toUserResponse(user, userTags);
+                    UserResponse userResponse = getUserResponse(post);
                     Boolean isFavorite = favoriteService.existsFavorite(authUserId, post.getId());
 
                     return mapper.toPostResponse(post,
@@ -80,5 +84,25 @@ public class PostService {
     //Método que recebe um postId como parâmetro e verifica se o mesmo existe no banco de dados
     public boolean existsById(Integer postId) {
         return repository.existsById(postId);
+    }
+
+    //Método que recebe um postId e authUserId como parametro e retorna um PostPageResponse para ser utilizado na construção
+    //da página do Post no front
+    public PostPageResponse getPostById(final Integer postId, final Integer authUserId) {
+        Post postDomain = repository.findPostById(postId);
+
+        UserResponse userResponse = getUserResponse(postDomain);
+
+        List<CommentResponse> comments = commentService.getPostComments(postDomain.getId());
+        Boolean isFavorite = favoriteService.existsFavorite(authUserId, postDomain.getId());
+        List<String> postTag = postTagService.findAllByPostId(postDomain.getId());
+
+        return mapper.toPostPageResponse(postDomain, postTag, userResponse, isFavorite, comments);
+    }
+
+    private UserResponse getUserResponse(Post postDomain) {
+        User user = userService.findById(postDomain.getUserId());
+        List<String> userTags = userTagService.findAllByUserId(postDomain.getUserId());
+        return userMapper.toUserResponse(user, userTags);
     }
 }

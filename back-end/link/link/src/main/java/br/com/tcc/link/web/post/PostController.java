@@ -1,6 +1,7 @@
 package br.com.tcc.link.web.post;
 
 import br.com.tcc.link.representation.request.post.CreatePostRequest;
+import br.com.tcc.link.representation.response.post.PostPageResponse;
 import br.com.tcc.link.representation.response.post.PostResponse;
 import br.com.tcc.link.service.post.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,5 +33,11 @@ public class PostController {
     @ResponseStatus(HttpStatus.OK)
     public List<PostResponse> getAllPosts(@RequestParam Integer authUserId) {
         return postService.getAllPosts(authUserId);
+    }
+
+    @GetMapping("{postId}")
+    @ResponseStatus(HttpStatus.OK)
+    public PostPageResponse getPost(@RequestParam Integer authUserId, @PathVariable Integer postId) {
+        return postService.getPostById(postId, authUserId);
     }
 }
