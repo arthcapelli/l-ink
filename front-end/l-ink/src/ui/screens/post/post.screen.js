@@ -1,25 +1,45 @@
-import "./style.css";
-import { useHistory, useParams } from "react-router";
-import { useState, useEffect } from "react";
-import { useGlobalUser } from "../../../context";
-import { useLinkApi } from "../../../api";
-import { Header, Post, Comment, Input } from "../../components";
-import send from "../../../assets/icons/send.png";
+import "./style.css"
+import { useParams } from "react-router"
+import { useState, useEffect } from "react"
+import { useGlobalUser } from "../../../context"
+import { useLinkApi } from "../../../api"
+import { Header, Post, Comment, Input } from "../../components"
+import { useToast } from "../../../hooks"
+import send from "../../../assets/icons/send.png"
 
 export function PostScreen() {
-  const [post, setPost] = useState(null);
-  const [user] = useGlobalUser();
-  const { id } = useParams();
-  const { getPost } = useLinkApi();
+  const { showErrorToast, showSuccessToast } = useToast()
+  const [post, setPost] = useState(null)
+  const [commentText, setCommentText] = useState("")
+  const [refresh, setRefresh] = useState(false)
+  const [user] = useGlobalUser()
+  const { id } = useParams()
+  const { getPost } = useLinkApi()
+  const { createComment } = useLinkApi()
 
   useEffect(() => {
     async function getApiPost() {
-      const apiPost = await getPost(id, user.id);
-      setPost(apiPost);
+      const apiPost = await getPost(id, user.id)
+      setPost(apiPost)
     }
 
-    getApiPost();
-  }, []);
+    getApiPost()
+  }, [refresh])
+
+  async function handleComment() {
+    if (!commentText.length) {
+      showErrorToast("Insira uma mensagem para criar o comentário!")
+      return
+    }
+
+    const response = await createComment(id, user.id, commentText)
+
+    if (response.length) {
+      showSuccessToast(response)
+      setRefresh(!refresh)
+      setCommentText("")
+    }
+  }
 
   return (
     <div>
@@ -28,21 +48,36 @@ export function PostScreen() {
         {!post ? (
           <p>Não tem post.</p>
         ) : (
-          <div>
+          <>
             <Post item={post} key={post.id} />
-            {!post.comments.length ? (
-              <p>Não tem comentários!</p>
-            ) : (
-              post.comments.map((comment) => <Comment item={comment} />)
-            )}
-          </div>
+            <div className="post-screen-comments">
+              <div className="container">
+                {!post.comments.length ? (
+                  <p>Não tem comentários!</p>
+                ) : (
+                  post.comments.map((comment) => (
+                    <Comment item={comment} key={comment.id} />
+                  ))
+                )}
+              </div>
+            </div>
+          </>
         )}
-        <Input
-          placeholder="Digite um comentário..."
-          className="post-screen-input"
-        />
-        <img className="post-screen-send" src={send}></img>
+        <div className="post-screen-input-comment container">
+          <Input
+            placeholder="Digite um comentário..."
+            className="post-screen-input"
+            inputProps={{ maxLength: 200 }}
+            value={commentText}
+            onChange={setCommentText}
+          />
+          <img
+            className="post-screen-send"
+            src={send}
+            onClick={handleComment}
+          ></img>
+        </div>
       </div>
     </div>
-  );
+  )
 }

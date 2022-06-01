@@ -4,4 +4,5 @@ export const ROUTES = {
   HOME: "/home",
   CREATE_POST: "/create-post",
   POST_PAGE: "/post/:id",
-};
+  PROFILE: "/profile/:id",
+}

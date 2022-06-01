@@ -1,35 +1,32 @@
 import {
   Input,
   ButtonFunction,
-  ButtonLink,
   MultipleSelectChip,
   Header,
-} from "../../components";
-import { useLinkApi } from "../../../api";
-import { useState } from "react";
-import { useHistory } from "react-router-dom";
-import { ROUTES } from "../../../constants";
-import { useToast } from "../../../hooks";
-import Switch from "@material-ui/core/Switch";
-import "./style.css";
-import logo from "../../../assets/images/logo.png";
-import { useGlobalUser } from "../../../context";
-import bg_image from "../../../assets/icons/bg-image.png";
+} from "../../components"
+import { useLinkApi } from "../../../api"
+import { useState } from "react"
+import { useHistory } from "react-router-dom"
+import { ROUTES } from "../../../constants"
+import { useToast } from "../../../hooks"
+import "./style.css"
+import { useGlobalUser } from "../../../context"
+import bg_image from "../../../assets/icons/bg-image.png"
 
 export function CreatePostScreen() {
-  const { showErrorToast, showSuccessToast } = useToast();
-  const [postImg, setPostImg] = useState("");
-  const [bodyLocal, setBodyLocal] = useState("");
-  const [measures, setMeasures] = useState("");
-  const [postTags, setPostTags] = useState([]);
-  const history = useHistory();
-  const [user, setUser] = useGlobalUser();
-  const { createPost } = useLinkApi();
+  const { showErrorToast, showSuccessToast } = useToast()
+  const [postImg, setPostImg] = useState("")
+  const [bodyLocal, setBodyLocal] = useState("")
+  const [measures, setMeasures] = useState("")
+  const [postTags, setPostTags] = useState([])
+  const history = useHistory()
+  const [user] = useGlobalUser()
+  const { createPost } = useLinkApi()
 
   async function create() {
     if (!postImg.length) {
-      showErrorToast("Insira uma imagem para criar o post!");
-      return;
+      showErrorToast("Insira uma imagem para criar o post!")
+      return
     }
 
     const response = await createPost(
@@ -38,18 +35,18 @@ export function CreatePostScreen() {
       measures,
       user.id,
       postTags
-    );
+    )
 
     if (response.length) {
-      showSuccessToast(response);
-      history.push(ROUTES.HOME);
+      showSuccessToast(response)
+      history.push(ROUTES.HOME)
     }
   }
 
   function handleSubmit(event) {
-    event.preventDefault();
+    event.preventDefault()
 
-    create();
+    create()
   }
 
   return (
@@ -103,5 +100,5 @@ export function CreatePostScreen() {
         </div>
       </div>
     </>
-  );
+  )
 }

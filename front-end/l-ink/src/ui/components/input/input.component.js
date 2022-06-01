@@ -1,10 +1,10 @@
-import "./style.css";
-import TextField from "@material-ui/core/TextField";
-import Grid from "@material-ui/core/Grid";
+import "./style.css"
+import TextField from "@material-ui/core/TextField"
+import Grid from "@material-ui/core/Grid"
 
 export function Input({ onChange, ...props }) {
   function handleChange(event) {
-    onChange(event.target.value);
+    onChange(event.target.value)
   }
 
   return (
@@ -16,5 +16,5 @@ export function Input({ onChange, ...props }) {
         variant="outlined"
       />
     </Grid>
-  );
+  )
 }
