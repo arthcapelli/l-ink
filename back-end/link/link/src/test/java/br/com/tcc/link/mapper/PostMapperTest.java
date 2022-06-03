@@ -54,16 +54,19 @@ public class PostMapperTest {
 
         assertEquals(post.getId(), postResponse.getId());
         assertEquals(post.getPostImg(), postResponse.getPostImg());
-        assertEquals(post.getBodyLocal(), post.getBodyLocal());
-        assertEquals(post.getMeasures(), post.getMeasures());
+        assertEquals(post.getBodyLocal(), postResponse.getBodyLocal());
+        assertEquals(post.getMeasures(), postResponse.getMeasures());
         assertEquals(post.getUserId(), postResponse.getUserResponse().getId());
         assertEquals(post.getUserId(), postResponse.getUserResponse().getId());
+        assertEquals(post.getCreatedAt().toString(), postResponse.getCreatedAt());
         assertEquals(tags, postResponse.getPostTags());
         assertEquals(userResponse.getId(), postResponse.getUserResponse().getId());
         assertEquals(userResponse.getName(), postResponse.getUserResponse().getName());
         assertEquals(userResponse.getAvatar(), postResponse.getUserResponse().getAvatar());
         assertEquals(userResponse.getExpTime(), postResponse.getUserResponse().getExpTime());
         assertEquals(userResponse.getUserTags(), postResponse.getUserResponse().getUserTags());
+        assertEquals(userResponse.getLocation(), postResponse.getUserResponse().getLocation());
+        assertEquals(userResponse.getPhone(), postResponse.getUserResponse().getPhone());
         assertTrue(postResponse.getIsFavorite());
     }
 
@@ -77,6 +80,7 @@ public class PostMapperTest {
         List<CommentResponse> commentResponses = asList(makeRandomCommentResponse(comment, userCommentResponse));
 
         Post post = makeRandomPost(userId);
+
         PostPageResponse postPageResponse = mapper.toPostPageResponse(post, tags, userResponse, true, commentResponses);
 
         assertEquals(post.getId(), postPageResponse.getId());
@@ -84,12 +88,16 @@ public class PostMapperTest {
         assertEquals(post.getBodyLocal(), postPageResponse.getBodyLocal());
         assertEquals(post.getMeasures(), postPageResponse.getMeasures());
         assertEquals(post.getUserId(), postPageResponse.getUserResponse().getId());
+        assertEquals(post.getCreatedAt().toString(), postPageResponse.getCreatedAt());
         assertEquals(tags, postPageResponse.getPostTags());
         assertEquals(userResponse.getId(), postPageResponse.getUserResponse().getId());
         assertEquals(userResponse.getName(), postPageResponse.getUserResponse().getName());
         assertEquals(userResponse.getAvatar(), postPageResponse.getUserResponse().getAvatar());
         assertEquals(userResponse.getExpTime(), postPageResponse.getUserResponse().getExpTime());
         assertEquals(userResponse.getUserTags(), postPageResponse.getUserResponse().getUserTags());
+        assertEquals(userResponse.getLocation(), postPageResponse.getUserResponse().getLocation());
+        assertEquals(userResponse.getPhone(), postPageResponse.getUserResponse().getPhone());
+        assertEquals(commentResponses, postPageResponse.getComments());
         assertTrue(postPageResponse.getIsFavorite());
     }
 }

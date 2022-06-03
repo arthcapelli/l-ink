@@ -20,6 +20,8 @@ public class UserMapper {
                 .avatar(request.getAvatar())
                 .isTattooArtist(request.getIsTattooArtist())
                 .expTime(request.getExpTime())
+                .location(request.getLocation())
+                .phone(request.getPhone())
                 .build();
     }
 
@@ -32,6 +34,8 @@ public class UserMapper {
                 .expTime(user.getExpTime())
                 .isTattooArtist(user.getIsTattooArtist())
                 .userTags(userTags)
+                .location(user.getLocation())
+                .phone(user.getPhone())
                 .build();
     }
 

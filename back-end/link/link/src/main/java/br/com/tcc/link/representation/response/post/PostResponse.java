@@ -21,4 +21,5 @@ public class PostResponse {
     private UserResponse userResponse;
     private List<String> postTags;
     private Boolean isFavorite;
+    private String createdAt;
 }

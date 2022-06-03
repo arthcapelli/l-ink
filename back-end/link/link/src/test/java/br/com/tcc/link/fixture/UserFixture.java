@@ -16,6 +16,8 @@ public class UserFixture {
                 .password(randomAlphabetic(10))
                 .avatar(randomAlphabetic(10))
                 .isTattooArtist(nextBoolean())
+                .location(randomAlphabetic(10))
+                .phone(randomAlphabetic(10))
                 .build();
     }
 }

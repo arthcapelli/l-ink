@@ -15,6 +15,8 @@ public class UserResponseFixture {
                 .name(randomAlphabetic(10))
                 .avatar(randomAlphabetic(10))
                 .userTags(userTags)
+                .location(randomAlphabetic(10))
+                .phone(randomAlphabetic(10))
                 .build();
     }
 

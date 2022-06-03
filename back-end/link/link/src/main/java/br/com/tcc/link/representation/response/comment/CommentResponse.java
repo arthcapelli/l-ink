@@ -15,4 +15,5 @@ public class CommentResponse {
     private int id;
     private String commentText;
     private UserCommentResponse userResponse;
+    private String createdAt;
 }

@@ -6,7 +6,9 @@ create table db_user (
 	password varchar(128) not null,
 	avatar varchar(200),
 	is_tattoo_artist boolean not null,
-	exp_time integer
+	exp_time integer,
+	location varchar(200),
+	phone varchar(20)
 );
 create sequence seq_db_user start with 1 increment by 1;
 select * from db_user;
@@ -19,7 +21,7 @@ create table db_user_tag (
 	constraint id_user_tag_fk_id_user foreign key (user_id) references db_user(id)
 );
 create sequence seq_db_user_tag start with 1 increment by 1;
-select * from db_user_tag
+select * from db_user_tag;
 
 --POST
 create table db_post (
@@ -27,11 +29,12 @@ create table db_post (
 	post_img varchar(500) not null,
 	body_local varchar(150),
 	measures varchar(25),
+	created_at Timestamp not null,
 	user_id integer NOT NULL,
 	CONSTRAINT id_post_fk_id_user FOREIGN KEY (user_id) REFERENCES db_user(id)
 );
 create sequence seq_db_post start with 1 increment by 1;
-select * from db_post
+select * from db_post;
 
 --POST TAG
 create table db_post_tag (
@@ -41,7 +44,7 @@ create table db_post_tag (
 	constraint id_post_tag_fk_id_post foreign key (post_id) references db_post(id)
 );
 create sequence seq_db_post_tag start with 1 increment by 1;
-select * from db_post_tag
+select * from db_post_tag;
 
 --FAVORITE
 CREATE TABLE db_favorite (

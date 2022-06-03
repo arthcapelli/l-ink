@@ -36,4 +36,10 @@ public class User {
     @Column(name = "exp_time")
     private Integer expTime;
 
+    @Column(name = "location")
+    private String location;
+
+    @Column(name = "phone")
+    private String phone;
+
 }

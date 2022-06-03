@@ -160,6 +160,8 @@ public class PostServiceTest {
         assertEquals(postResponse.getUserResponse().getExpTime(), response.get(0).getUserResponse().getExpTime());
         assertEquals(postResponse.getUserResponse().isTattooArtist(), response.get(0).getUserResponse().isTattooArtist());
         assertEquals(postResponse.getUserResponse().getUserTags().get(0), response.get(0).getUserResponse().getUserTags().get(0));
+        assertEquals(postResponse.getUserResponse().getLocation(), response.get(0).getUserResponse().getLocation());
+        assertEquals(postResponse.getUserResponse().getPhone(), response.get(0).getUserResponse().getPhone());
         for (int i = 0; i < postTags.size(); i++) {
             assertEquals(postTags.get(i), response.get(0).getPostTags().get(i));
         }
@@ -194,6 +196,8 @@ public class PostServiceTest {
         assertEquals(postPageResponse.getUserResponse().isTattooArtist(), response.getUserResponse().isTattooArtist());
         assertEquals(postPageResponse.getUserResponse().getUserTags().get(0), response.getUserResponse().getUserTags().get(0));
         assertEquals(postPageResponse.getUserResponse().getId(), response.getUserResponse().getId());
+        assertEquals(postPageResponse.getUserResponse().getLocation(), response.getUserResponse().getLocation());
+        assertEquals(postPageResponse.getUserResponse().getPhone(), response.getUserResponse().getPhone());
         for (int i = 0; i < postTags.size(); i++) {
             assertEquals(postTags.get(i), response.getPostTags().get(i));
         }

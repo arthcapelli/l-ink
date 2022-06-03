@@ -12,6 +12,7 @@ public class CommentResponseFixture {
                 .id(comment.getId())
                 .commentText(comment.getCommentText())
                 .userResponse(userCommentResponse)
+                .createdAt(comment.getCreatedAt().toString())
                 .build();
     }
 }

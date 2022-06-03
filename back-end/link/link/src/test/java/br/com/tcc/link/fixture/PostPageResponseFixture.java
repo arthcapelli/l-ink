@@ -6,6 +6,7 @@ import br.com.tcc.link.representation.response.user.UserResponse;
 
 import java.util.List;
 
+import static br.com.tcc.link.fixture.LocalDateTimeFixture.japan2011Earthquake;
 import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
 import static org.apache.commons.lang3.RandomUtils.nextInt;
 
@@ -24,6 +25,7 @@ public class PostPageResponseFixture {
                 .postTags(postTags)
                 .isFavorite(isFavorite)
                 .comments(commentResponses)
+                .createdAt(japan2011Earthquake().toString())
                 .build();
     }
 }

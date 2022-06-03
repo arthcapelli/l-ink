@@ -8,6 +8,7 @@ import br.com.tcc.link.representation.response.post.PostResponse;
 import br.com.tcc.link.representation.response.user.UserResponse;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Component
@@ -20,6 +21,7 @@ public class PostMapper {
                 .bodyLocal(request.getBodyLocal())
                 .measures(request.getMeasures())
                 .userId(request.getUserId())
+                .createdAt(LocalDateTime.now())
                 .build();
     }
 
@@ -33,9 +35,11 @@ public class PostMapper {
                 .userResponse(userResponse)
                 .postTags(postTags)
                 .isFavorite(isFavorite)
+                .createdAt(post.getCreatedAt().toString())
                 .build();
     }
 
+    //Método que realiza conversão de Post para PostPageResponse, para que o mesmo seja utilizado na sua página no front
     public PostPageResponse toPostPageResponse(final Post post,
                                                final List<String> postTags,
                                                final UserResponse userResponse,
@@ -50,6 +54,7 @@ public class PostMapper {
                 .postTags(postTags)
                 .isFavorite(isFavorite)
                 .comments(commentResponse)
+                .createdAt(post.getCreatedAt().toString())
                 .build();
     }
 }

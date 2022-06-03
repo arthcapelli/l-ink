@@ -27,6 +27,7 @@ public class CommentMapper {
                 .id(comment.getId())
                 .commentText(comment.getCommentText())
                 .userResponse(userResponse)
+                .createdAt(comment.getCreatedAt().toString())
                 .build();
     }
 }
