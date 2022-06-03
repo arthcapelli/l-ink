@@ -14,8 +14,7 @@ export function PostScreen() {
   const [refresh, setRefresh] = useState(false)
   const [user] = useGlobalUser()
   const { id } = useParams()
-  const { getPost } = useLinkApi()
-  const { createComment } = useLinkApi()
+  const { createComment, getPost } = useLinkApi()
 
   useEffect(() => {
     async function getApiPost() {

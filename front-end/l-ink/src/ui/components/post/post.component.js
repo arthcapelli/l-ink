@@ -1,17 +1,21 @@
-import "./style.css";
-import { Favorite } from "../favorite/favorite.component";
-import { useState } from "react";
-import { useGlobalUser } from "../../../context";
-import { useHistory } from "react-router-dom";
+import "./style.css"
+import { Favorite } from "../favorite/favorite.component"
+import { useState } from "react"
+import { useGlobalUser } from "../../../context"
+import { useHistory } from "react-router-dom"
 
 export function Post({ item }) {
-  const { id, userResponse, postImg, isFavorite } = item;
-  const [user] = useGlobalUser();
-  const [favorite, setFavorite] = useState(isFavorite);
-  const { push } = useHistory();
+  const { id, userResponse, postImg, isFavorite } = item
+  const [user] = useGlobalUser()
+  const [favorite, setFavorite] = useState(isFavorite)
+  const { push } = useHistory()
 
   function handleClickPost() {
-    push(`/post/${id}`);
+    push(`/post/${id}`)
+  }
+
+  function handleClickUser() {
+    push(`/profile/${userResponse.id}`)
   }
 
   return (
@@ -25,7 +29,7 @@ export function Post({ item }) {
         ></img>
       </div>
       <div className="feed-card-info">
-        <div className="feed-card-author">
+        <div className="feed-card-author" onClick={handleClickUser}>
           <img
             src={userResponse.avatar}
             alt="avatar"
@@ -42,5 +46,5 @@ export function Post({ item }) {
         )}
       </div>
     </div>
-  );
+  )
 }

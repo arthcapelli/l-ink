@@ -1,0 +1,31 @@
+.profile-info{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    width: 100%;
+    height: 20vh;
+    background-color: rgb(197, 197, 197);
+}
+
+.profile-info-left{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+}
+
+.profile-info-right{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+}
+
+.profile-info-avatar{
+    width: 60%;
+}
+
+.profile-info-img{
+    width: 100%;
+    border-radius: 10px;
+}

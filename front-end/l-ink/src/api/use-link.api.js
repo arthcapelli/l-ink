@@ -102,6 +102,11 @@ const useLinkApi = () => {
     return response
   }
 
+  const getUser = async (userId) => {
+    const user = await get(`usuario/${userId}`, HIDE_LOADER)
+    return user
+  }
+
   return {
     createUser,
     login,
@@ -111,6 +116,7 @@ const useLinkApi = () => {
     favoritePost,
     getPost,
     createComment,
+    getUser,
   }
 }
 
