@@ -23,4 +23,5 @@ public class PostPageResponse {
     private List<String> postTags;
     private Boolean isFavorite;
     private List<CommentResponse> comments;
+    private String createdAt;
 }

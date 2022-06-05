@@ -119,6 +119,8 @@ public class UserServiceTest {
         assertEquals(user.getExpTime(), response.getExpTime());
         assertEquals(user.getIsTattooArtist(), response.getIsTattooArtist());
         assertEquals(user.getPassword(), response.getPassword());
+        assertEquals(user.getLocation(), response.getLocation());
+        assertEquals(user.getPhone(), response.getPhone());
     }
 
     @Test
@@ -137,6 +139,10 @@ public class UserServiceTest {
         assertEquals(userResponse.getAvatar(), response.getAvatar());
         assertEquals(userResponse.getExpTime(), response.getExpTime());
         assertEquals(userResponse.isTattooArtist(), response.isTattooArtist());
+        assertEquals(userResponse.getStreet(), response.getStreet());
+        assertEquals(userResponse.getCity(), response.getCity());
+        assertEquals(userResponse.getUf(), response.getUf());
+        assertEquals(userResponse.getPhone(), response.getPhone());
         assertEquals(userTags, response.getUserTags());
     }
 }

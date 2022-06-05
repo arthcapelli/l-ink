@@ -38,6 +38,7 @@ public class CommentMapperTest {
 
         assertEquals(comment.getId(), response.getId());
         assertEquals(comment.getCommentText(), response.getCommentText());
+        assertEquals(comment.getCreatedAt().toString(), response.getCreatedAt());
         assertEquals(userResponse.getId(), response.getUserResponse().getId());
         assertEquals(userResponse.getName(), response.getUserResponse().getName());
         assertEquals(userResponse.getAvatar(), response.getUserResponse().getAvatar());

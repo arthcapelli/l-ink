@@ -1,13 +1,18 @@
 import "./style.css"
+import address from "../../../assets/icons/map.png"
+import machine from "../../../assets/icons/machine.png"
+import whatsapp from "../../../assets/icons/whatsapp.png"
 
 export function ProfileInfo({ user }) {
   const {
     name,
     userTags,
     avatar,
-    location,
-    whatsapp,
-    isTattooArtist,
+    street,
+    city,
+    uf,
+    phone,
+    tattooArtist,
     expTime,
   } = user
 
@@ -19,23 +24,27 @@ export function ProfileInfo({ user }) {
         </div>
         <div className="profile-info-name">{name}</div>
       </div>
-      <div className="profile-info-right">
-        {!isTattooArtist ? (
-          <div className="profile-info-tags">
-            {userTags.map((tag) => (
-              <div className="profile-info-tag" key={tag}>
-                {tag}
+      {tattooArtist && (
+        <div className="profile-info-right">
+          <div className="profile-info-address adjust-display">
+            <img className="profile-info-address-icon" src={address} />
+            <div className="profile-info-address-text">
+              <div className="profile-info-street">{street}</div>
+              <div className="profile-info-city-uf">
+                {city} - {uf}
               </div>
-            ))}
+            </div>
           </div>
-        ) : (
-          <div>
-            <div className="profile-info-location">{location}</div>
-            <div className="profile-info-whatsapp">{whatsapp}</div>
-            <div className="profile-info-expTime">{expTime}</div>
+          <div className="profile-info-phone adjust-display">
+            <img className="profile-info-phone-icon" src={whatsapp} />
+            <div className="profile-info-phone">{phone}</div>
           </div>
-        )}
-      </div>
+          <div className="profile-info-machine adjust-display">
+            <img className="profile-info-exptime-icon" src={machine} />
+            <div className="profile-info-expTime">{expTime} anos</div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

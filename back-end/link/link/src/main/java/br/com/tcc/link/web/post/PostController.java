@@ -37,7 +37,13 @@ public class PostController {
 
     @GetMapping("{postId}")
     @ResponseStatus(HttpStatus.OK)
-    public PostPageResponse getPost(@RequestParam Integer authUserId, @PathVariable Integer postId) {
+    public PostPageResponse getPost(@PathVariable Integer postId, @RequestParam Integer authUserId) {
         return postService.getPostById(postId, authUserId);
+    }
+
+    @GetMapping("user-posts/{userId}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<PostResponse> getPostsByUserId(@PathVariable Integer userId, @RequestParam Integer authUserId) {
+        return postService.getPostsByUserId(userId, authUserId);
     }
 }

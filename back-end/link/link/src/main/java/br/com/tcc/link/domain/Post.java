@@ -4,6 +4,7 @@ package br.com.tcc.link.domain;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -25,6 +26,8 @@ public class Post {
     private String bodyLocal;
 
     private String measures;
+
+    private LocalDateTime createdAt;
 
     private Integer userId;
 

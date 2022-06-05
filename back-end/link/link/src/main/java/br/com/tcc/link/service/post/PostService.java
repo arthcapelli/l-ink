@@ -100,6 +100,18 @@ public class PostService {
         return mapper.toPostPageResponse(postDomain, postTag, userResponse, isFavorite, comments);
     }
 
+    //Método que recebe um userId e authUserId como parametro e retorna a lista de PostResponse com base no userId para
+    // ser utilizado na construção da página de perfil do usuário no front
+    public List<PostResponse> getPostsByUserId(final Integer userId, final Integer authUserId) {
+        return repository.findAllByUserIdOrderByIdDesc(userId).stream().map(post -> {
+            UserResponse userResponse = getUserResponse(post);
+            Boolean isFavorite = favoriteService.existsFavorite(authUserId, post.getId());
+            List<String> postTags = postTagService.findAllByPostId(post.getId());
+
+            return mapper.toPostResponse(post, postTags, userResponse, isFavorite);
+        }).collect(Collectors.toList());
+    }
+
     private UserResponse getUserResponse(Post postDomain) {
         User user = userService.findById(postDomain.getUserId());
         List<String> userTags = userTagService.findAllByUserId(postDomain.getUserId());

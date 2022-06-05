@@ -73,7 +73,7 @@ public class CommentServiceTest {
     }
 
     @Test
-    public void returnCommentResponsesByPostWithSuccess(){
+    public void returnCommentResponsesByPostWithSuccess() {
         List<Comment> commentList = asList(comment);
 
         when(repository.findAllByPostId(comment.getPostId())).thenReturn(commentList);
@@ -85,6 +85,7 @@ public class CommentServiceTest {
 
         assertEquals(response.get(0).getId(), comment.getId());
         assertEquals(response.get(0).getCommentText(), comment.getCommentText());
+        assertEquals(response.get(0).getCreatedAt(), comment.getCreatedAt().toString());
         assertEquals(response.get(0).getUserResponse().getId(), userCommentResponse.getId());
         assertEquals(response.get(0).getUserResponse().getAvatar(), userCommentResponse.getAvatar());
         assertEquals(response.get(0).getUserResponse().getName(), userCommentResponse.getName());

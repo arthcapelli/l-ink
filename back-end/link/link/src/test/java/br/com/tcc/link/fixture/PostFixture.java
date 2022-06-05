@@ -2,6 +2,7 @@ package br.com.tcc.link.fixture;
 
 import br.com.tcc.link.domain.Post;
 
+import static br.com.tcc.link.fixture.LocalDateTimeFixture.japan2011Earthquake;
 import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
 import static org.apache.commons.lang3.RandomUtils.nextInt;
 
@@ -14,6 +15,7 @@ public class PostFixture {
                 .postImg(randomAlphabetic(10))
                 .measures(randomAlphabetic(10))
                 .userId(userId)
+                .createdAt(japan2011Earthquake())
                 .build();
     }
 }

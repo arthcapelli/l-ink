@@ -17,5 +17,7 @@ public class CreateUserRequest {
     private String avatar;
     private Boolean isTattooArtist;
     private Integer expTime;
+    private String location;
+    private String phone;
     private List<String> userTags;
 }

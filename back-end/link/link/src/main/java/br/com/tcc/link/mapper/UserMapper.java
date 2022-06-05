@@ -20,11 +20,15 @@ public class UserMapper {
                 .avatar(request.getAvatar())
                 .isTattooArtist(request.getIsTattooArtist())
                 .expTime(request.getExpTime())
+                .location(request.getLocation())
+                .phone(request.getPhone())
                 .build();
     }
 
     //Método que realiza conversão de User para UserResponse, para que o mesmo seja utilizado no front
     public UserResponse toUserResponse(final User user, List<String> userTags) {
+        String[] address = getAddress(user);
+
         return UserResponse.builder()
                 .id(user.getId())
                 .name(user.getName())
@@ -32,7 +36,16 @@ public class UserMapper {
                 .expTime(user.getExpTime())
                 .isTattooArtist(user.getIsTattooArtist())
                 .userTags(userTags)
+                .street(address[0])
+                .city(address[1])
+                .uf(address[2])
+                .phone(user.getPhone())
                 .build();
+    }
+
+    private String[] getAddress(User user) {
+        String defaultLocation = " - - ";
+        return user.getIsTattooArtist() ? user.getLocation().split("-") : defaultLocation.split("-");
     }
 
     //Método para converter User para UserCommentResponse, para que o mesmo seja utilizado no front

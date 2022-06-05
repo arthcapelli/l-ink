@@ -15,6 +15,8 @@ const useLinkApi = () => {
     confirmPassword,
     isTattooArtist,
     expTime,
+    phone,
+    location,
     userTags
   ) => {
     const response = await post(
@@ -27,6 +29,8 @@ const useLinkApi = () => {
         confirmPassword,
         isTattooArtist,
         expTime,
+        phone,
+        location,
         userTags,
       },
       HIDE_LOADER
@@ -107,6 +111,14 @@ const useLinkApi = () => {
     return user
   }
 
+  const getUserPosts = async (userId, authUserId) => {
+    const posts = await get(
+      `post/user-posts/${userId}?authUserId=${authUserId}`,
+      HIDE_LOADER
+    )
+    return posts
+  }
+
   return {
     createUser,
     login,
@@ -117,6 +129,7 @@ const useLinkApi = () => {
     getPost,
     createComment,
     getUser,
+    getUserPosts,
   }
 }
 
