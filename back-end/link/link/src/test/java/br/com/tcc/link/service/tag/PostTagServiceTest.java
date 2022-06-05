@@ -16,6 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.RandomUtils.nextInt;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
@@ -80,6 +81,17 @@ public class PostTagServiceTest {
 
         for (int i = 0; i < postTags.size(); i++) {
             assertEquals(postTags.get(i).getTagName(), response.get(i));
+        }
+    }
+
+    @Test
+    public void findAllByTahNameIn() {
+        when(repository.findAllByTagNameIn(asList(tagName))).thenReturn(postTags);
+
+        List<PostTag> response = service.findAllByTagNameIn(asList(tagName));
+
+        for (int i = 0; i < postTags.size(); i++) {
+            assertEquals(postTags.get(i), response.get(i));
         }
     }
 }

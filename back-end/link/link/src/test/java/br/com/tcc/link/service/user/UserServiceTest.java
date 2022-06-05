@@ -46,7 +46,7 @@ public class UserServiceTest {
 
     @Before
     public void setUp() {
-        user = makeRandomUser();
+        user = makeRandomUser(true);
         request = makeRandomCreateUserRequest();
     }
 

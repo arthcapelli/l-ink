@@ -72,7 +72,8 @@ public class PostService {
         repository.delete(post);
     }
 
-    //Método que retorna a lista de todos os posts salvos no banco de dados, associados às suas respectivas Tags
+    //Método que retorna a lista de todos os posts salvos no banco de dados, associados às suas respectivas Tags,
+    //filtrando se necessário.
     public List<PostResponse> getAllPosts(final Integer authUserId, final List<String> filterTags) {
         List<Post> postList = getFilteredPosts(filterTags);
 
@@ -87,6 +88,7 @@ public class PostService {
                 .collect(Collectors.toList());
     }
 
+    //Método que retorna a lista de posts filtrados pelas tags passadas como parâmetro, caso o parametro não seja nulo,
     private List<Post> getFilteredPosts(List<String> filterTags) {
         List<Post> postList;
         if (!isNull(filterTags)) {

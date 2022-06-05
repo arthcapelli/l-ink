@@ -36,7 +36,7 @@ public class UserMapperTest {
 
     @Test
     public void userDomainToUserResponse() {
-        User randomUser = makeRandomUser();
+        User randomUser = makeRandomUser(true);
         List<String> userTags = List.of("Blackwork");
         UserResponse userResponse = mapper.toUserResponse(randomUser, userTags);
 
@@ -54,7 +54,7 @@ public class UserMapperTest {
 
     @Test
     public void userDomainToUserCommentResponse() {
-        User randomUser = makeRandomUser();
+        User randomUser = makeRandomUser(true);
         UserCommentResponse userCommentResponse = mapper.toCommentResponse(randomUser);
 
         assertEquals(userCommentResponse.getName(), randomUser.getName());

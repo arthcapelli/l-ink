@@ -55,7 +55,7 @@ public class CommentServiceTest {
 
     @Before
     public void setUp() {
-        user = makeRandomUser();
+        user = makeRandomUser(false);
         userCommentResponse = makeRandomUserCommentResponse();
         comment = makeRandomComment(userCommentResponse.getId());
         request = makeRandomCreateCommentRequest();

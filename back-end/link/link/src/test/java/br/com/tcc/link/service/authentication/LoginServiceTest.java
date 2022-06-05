@@ -45,7 +45,7 @@ public class LoginServiceTest {
 
     @Before
     public void setUp() {
-        user = makeRandomUser();
+        user = makeRandomUser(false);
         request = makeRandomLoginRequest();
     }
 
