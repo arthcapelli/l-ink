@@ -31,8 +31,8 @@ public class PostController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<PostResponse> getAllPosts(@RequestParam Integer authUserId) {
-        return postService.getAllPosts(authUserId);
+    public List<PostResponse> getAllPosts(@RequestParam Integer authUserId, @RequestParam(required = false) List<String> filterTags) {
+        return postService.getAllPosts(authUserId, filterTags);
     }
 
     @GetMapping("{postId}")

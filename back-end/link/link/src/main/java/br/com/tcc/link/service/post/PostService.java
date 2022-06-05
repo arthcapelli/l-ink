@@ -1,6 +1,7 @@
 package br.com.tcc.link.service.post;
 
 import br.com.tcc.link.domain.Post;
+import br.com.tcc.link.domain.PostTag;
 import br.com.tcc.link.domain.User;
 import br.com.tcc.link.mapper.PostMapper;
 import br.com.tcc.link.mapper.UserMapper;
@@ -18,8 +19,13 @@ import br.com.tcc.link.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
+
+import static java.util.Objects.isNull;
 
 @Service
 public class PostService {
@@ -67,8 +73,8 @@ public class PostService {
     }
 
     //Método que retorna a lista de todos os posts salvos no banco de dados, associados às suas respectivas Tags
-    public List<PostResponse> getAllPosts(final Integer authUserId) {
-        List<Post> postList = repository.findAllByOrderByIdDesc();
+    public List<PostResponse> getAllPosts(final Integer authUserId, final List<String> filterTags) {
+        List<Post> postList = getFilteredPosts(filterTags);
 
         return postList.stream()
                 .map(post -> {
@@ -79,6 +85,32 @@ public class PostService {
                             postTagService.findAllByPostId(post.getId()), userResponse, isFavorite);
                 })
                 .collect(Collectors.toList());
+    }
+
+    private List<Post> getFilteredPosts(List<String> filterTags) {
+        List<Post> postList;
+        if (!isNull(filterTags)) {
+            List<Integer> postIdFiltered = new ArrayList<>();
+            List<PostTag> postTags = postTagService.findAllByTagNameIn(filterTags);
+            List<Integer> postIds = postTags.stream().map(PostTag::getPostId).collect(Collectors.toList());
+
+            for (int i = 0; i < postIds.size(); i++) {
+                int cont = 0;
+                for (Integer postId : postIds) {
+                    if (Objects.equals(postIds.get(i), postId)) {
+                        cont++;
+                    }
+                }
+                if (cont == filterTags.size() && !postIdFiltered.contains(postIds.get(i))) {
+                    postIdFiltered.add(postIds.get(i));
+                }
+            }
+            postList = repository.findAllByIdIn(postIdFiltered);
+            Collections.reverse(postList);
+        } else {
+            postList = repository.findAllByOrderByIdDesc();
+        }
+        return postList;
     }
 
     //Método que recebe um postId como parâmetro e verifica se o mesmo existe no banco de dados

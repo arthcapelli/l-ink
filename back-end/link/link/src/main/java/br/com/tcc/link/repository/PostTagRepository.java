@@ -10,5 +10,5 @@ import java.util.List;
 public interface PostTagRepository extends CrudRepository<PostTag, Integer> {
 
     List<PostTag> findAllByPostId(Integer idPost);
-
+    List<PostTag> findAllByTagNameIn(List<String> tagNames);
 }

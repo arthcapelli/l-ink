@@ -33,4 +33,8 @@ public class PostTagService {
                 .map(PostTag::getTagName)
                 .collect(Collectors.toList());
     }
+
+    public List<PostTag> findAllByTagNameIn(final List<String> tagNames) {
+        return repository.findAllByTagNameIn(tagNames);
+    }
 }
