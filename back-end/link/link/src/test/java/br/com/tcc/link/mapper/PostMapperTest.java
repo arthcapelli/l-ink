@@ -65,7 +65,9 @@ public class PostMapperTest {
         assertEquals(userResponse.getAvatar(), postResponse.getUserResponse().getAvatar());
         assertEquals(userResponse.getExpTime(), postResponse.getUserResponse().getExpTime());
         assertEquals(userResponse.getUserTags(), postResponse.getUserResponse().getUserTags());
-        assertEquals(userResponse.getLocation(), postResponse.getUserResponse().getLocation());
+        assertEquals(userResponse.getStreet(), postResponse.getUserResponse().getStreet());
+        assertEquals(userResponse.getCity(), postResponse.getUserResponse().getCity());
+        assertEquals(userResponse.getUf(), postResponse.getUserResponse().getUf());
         assertEquals(userResponse.getPhone(), postResponse.getUserResponse().getPhone());
         assertTrue(postResponse.getIsFavorite());
     }
@@ -95,7 +97,9 @@ public class PostMapperTest {
         assertEquals(userResponse.getAvatar(), postPageResponse.getUserResponse().getAvatar());
         assertEquals(userResponse.getExpTime(), postPageResponse.getUserResponse().getExpTime());
         assertEquals(userResponse.getUserTags(), postPageResponse.getUserResponse().getUserTags());
-        assertEquals(userResponse.getLocation(), postPageResponse.getUserResponse().getLocation());
+        assertEquals(userResponse.getStreet(), postPageResponse.getUserResponse().getStreet());
+        assertEquals(userResponse.getCity(), postPageResponse.getUserResponse().getCity());
+        assertEquals(userResponse.getUf(), postPageResponse.getUserResponse().getUf());
         assertEquals(userResponse.getPhone(), postPageResponse.getUserResponse().getPhone());
         assertEquals(commentResponses, postPageResponse.getComments());
         assertTrue(postPageResponse.getIsFavorite());

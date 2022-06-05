@@ -19,6 +19,8 @@ public class UserResponse {
     private Integer expTime;
     private boolean isTattooArtist;
     private List<String> userTags;
-    private String location;
+    private String street;
+    private String city;
+    private String uf;
     private String phone;
 }

@@ -12,4 +12,6 @@ public interface PostRepository extends CrudRepository<Post, Integer> {
     Post findPostById(Integer postId);
 
     List<Post> findAllByOrderByIdDesc();
+
+    List<Post> findAllByUserIdOrderByIdDesc(Integer userId);
 }

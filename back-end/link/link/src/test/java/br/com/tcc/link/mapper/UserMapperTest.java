@@ -45,7 +45,9 @@ public class UserMapperTest {
         assertEquals(userResponse.getAvatar(), randomUser.getAvatar());
         assertEquals(userResponse.isTattooArtist(), randomUser.getIsTattooArtist());
         assertEquals(userResponse.getExpTime(), randomUser.getExpTime());
-        assertEquals(userResponse.getLocation(), randomUser.getLocation());
+        assertEquals(userResponse.getStreet(), randomUser.getLocation().split("-")[0]);
+        assertEquals(userResponse.getCity(), randomUser.getLocation().split("-")[1]);
+        assertEquals(userResponse.getUf(), randomUser.getLocation().split("-")[2]);
         assertEquals(userResponse.getPhone(), randomUser.getPhone());
         assertEquals(userResponse.getUserTags(), userTags);
     }

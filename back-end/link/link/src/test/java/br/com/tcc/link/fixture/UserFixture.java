@@ -9,6 +9,10 @@ import static org.apache.commons.lang3.RandomUtils.nextInt;
 public class UserFixture {
 
     public static User makeRandomUser() {
+        String street = randomAlphabetic(10);
+        String city = randomAlphabetic(10);
+        String uf = randomAlphabetic(2);
+
         return User.builder()
                 .id(nextInt())
                 .name(randomAlphabetic(10))
@@ -16,7 +20,7 @@ public class UserFixture {
                 .password(randomAlphabetic(10))
                 .avatar(randomAlphabetic(10))
                 .isTattooArtist(nextBoolean())
-                .location(randomAlphabetic(10))
+                .location(String.format("%s-%s-%s", street, city, uf))
                 .phone(randomAlphabetic(10))
                 .build();
     }

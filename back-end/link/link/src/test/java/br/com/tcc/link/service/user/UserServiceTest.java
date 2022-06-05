@@ -139,7 +139,9 @@ public class UserServiceTest {
         assertEquals(userResponse.getAvatar(), response.getAvatar());
         assertEquals(userResponse.getExpTime(), response.getExpTime());
         assertEquals(userResponse.isTattooArtist(), response.isTattooArtist());
-        assertEquals(userResponse.getLocation(), response.getLocation());
+        assertEquals(userResponse.getStreet(), response.getStreet());
+        assertEquals(userResponse.getCity(), response.getCity());
+        assertEquals(userResponse.getUf(), response.getUf());
         assertEquals(userResponse.getPhone(), response.getPhone());
         assertEquals(userTags, response.getUserTags());
     }
