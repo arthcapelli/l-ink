@@ -12,22 +12,27 @@ import { useToast } from "../../../hooks"
 import "./style.css"
 import { useGlobalUser } from "../../../context"
 import bg_image from "../../../assets/icons/bg-image.png"
+import { height, width } from "@mui/system"
 
 export function CreatePostScreen() {
   const { showErrorToast, showSuccessToast } = useToast()
   const [postImg, setPostImg] = useState("")
   const [bodyLocal, setBodyLocal] = useState("")
   const [measures, setMeasures] = useState("")
+  const [height, setHeight] = useState("")
+  const [width, setWidth] = useState("")
   const [postTags, setPostTags] = useState([])
   const history = useHistory()
   const [user] = useGlobalUser()
   const { createPost } = useLinkApi()
 
   async function create() {
-    if (!postImg.length) {
-      showErrorToast("Insira uma imagem para criar o post!")
+    if (!postImg.length || postTags.length === 0) {
+      showErrorToast("Insira uma imagem e tags para criar o post!")
       return
     }
+
+    setMeasures(`${height}x${width}`)
 
     const response = await createPost(
       postImg,
@@ -57,35 +62,43 @@ export function CreatePostScreen() {
           className="create-post-img margin-default"
           src={postImg || bg_image}
         ></img>
-        <div className="container">
-          <form onSubmit={handleSubmit} className="create-post-content">
-            <Input
-              value={postImg}
-              onChange={setPostImg}
-              name="postImg"
-              label="Imagem"
-            />
-
-            <div className="create-post-middle">
-              <div>
-                <Input
-                  style={{ width: 145 }}
-                  value={bodyLocal}
-                  onChange={setBodyLocal}
-                  name="bodyLocal"
-                  label="Local do Corpo"
-                />
-              </div>
-
-              <div>
-                <Input
-                  style={{ width: 145 }}
-                  value={measures}
-                  onChange={setMeasures}
-                  name="measures"
-                  label="Altura x Largura"
-                />
-              </div>
+        <div className="container create-post-content">
+          <form onSubmit={handleSubmit} className="create-post-form">
+            <div className="create-post-form-input">
+              <Input
+                value={postImg}
+                inputProps={{ maxLength: "500" }}
+                onChange={setPostImg}
+                name="postImg"
+                label="Imagem"
+              />
+            </div>
+            <div className="create-post-form-input">
+              <Input
+                value={bodyLocal}
+                onChange={setBodyLocal}
+                inputProps={{ maxLength: "20" }}
+                name="bodyLocal"
+                label="Local do Corpo"
+              />
+            </div>
+            <div className="create-post-middle-measures">
+              <Input
+                style={{ width: 145 }}
+                value={height}
+                onChange={setHeight}
+                inputProps={{ maxLength: "3" }}
+                name="height"
+                label="Altura"
+              />
+              <Input
+                style={{ width: 145 }}
+                value={width}
+                onChange={setWidth}
+                inputProps={{ maxLength: "3" }}
+                name="width"
+                label="Largura"
+              />
             </div>
 
             <MultipleSelectChip setStyleTags={setPostTags} />

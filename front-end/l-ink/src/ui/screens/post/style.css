@@ -5,6 +5,30 @@
     justify-content: space-between;
 }
 
+.post-screen-info-text > p{
+    margin: 0;
+    font-size: 14px;
+    text-align: left;
+}
+
+.post-screen-info{
+    display: flex;
+    width: 90%;
+    justify-content: space-evenly;
+    align-items: center;
+    border: 2px dashed rgb(136, 136, 136);
+    border-radius: 5px;
+    padding: 5px 0;
+}
+
+.post-screen-info-icon{
+    width: 10%;
+}
+
+.info-icon{
+    width: 100%;
+}
+
 .post-screen-comments {
     min-height: 30vh;
     height: 30vh;

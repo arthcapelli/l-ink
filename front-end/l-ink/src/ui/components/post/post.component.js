@@ -3,9 +3,12 @@ import { Favorite } from "../favorite/favorite.component"
 import { useState } from "react"
 import { useGlobalUser } from "../../../context"
 import { useHistory } from "react-router-dom"
+import { getDate, getBrazilianTime } from "../../../utils/utils"
+import machine from "../../../assets/icons/machine.png"
 
 export function Post({ item }) {
-  const { id, userResponse, postImg, isFavorite } = item
+  const { id, userResponse, postImg, isFavorite, createdAt } = item
+
   const [user] = useGlobalUser()
   const [favorite, setFavorite] = useState(isFavorite)
   const { push } = useHistory()
@@ -30,20 +33,32 @@ export function Post({ item }) {
       </div>
       <div className="feed-card-info">
         <div className="feed-card-author" onClick={handleClickUser}>
-          <img
-            src={userResponse.avatar}
-            alt="avatar"
-            className="avatar-img"
-          ></img>
-          <div>{userResponse.name}</div>
+          <div className="post-author-img">
+            <img
+              src={userResponse.avatar}
+              alt="avatar"
+              className="avatar-img"
+            ></img>
+          </div>
+          <div className="feed-details">
+            <div className="post-author-name">{userResponse.name}</div>
+            <div className="post-date">
+              {getDate(createdAt)} - {getBrazilianTime(createdAt)}
+            </div>
+          </div>
         </div>
-        {user?.id && (
-          <Favorite
-            postId={id}
-            isFavorite={favorite}
-            setIsFavorite={setFavorite}
-          />
-        )}
+        <div className="feed-card-icons">
+          {userResponse.tattooArtist && (
+            <img src={machine} className="is-artist-symbol"></img>
+          )}
+          {user?.id && (
+            <Favorite
+              postId={id}
+              isFavorite={favorite}
+              setIsFavorite={setFavorite}
+            />
+          )}
+        </div>
       </div>
     </div>
   )

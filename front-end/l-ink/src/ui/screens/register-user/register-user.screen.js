@@ -3,38 +3,64 @@ import {
   ButtonFunction,
   ButtonLink,
   MultipleSelectChip,
-} from "../../components";
-import { useLinkApi } from "../../../api";
-import { useState } from "react";
-import { useHistory } from "react-router-dom";
-import { ROUTES } from "../../../constants";
-import { useToast } from "../../../hooks";
-import Switch from "@material-ui/core/Switch";
-import "./style.css";
-import logo from "../../../assets/images/logo.png";
-import { useGlobalUser } from "../../../context";
+} from "../../components"
+import { useLinkApi } from "../../../api"
+import { useState } from "react"
+import { useHistory } from "react-router-dom"
+import { ROUTES } from "../../../constants"
+import { useToast } from "../../../hooks"
+import {
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  Switch,
+} from "@material-ui/core"
+import "./style.css"
+import logo from "../../../assets/images/logo.png"
+import { useGlobalUser } from "../../../context"
+import { UF } from "../../../constants/uf.constants"
 
 export function RegisterUserScreen() {
-  const { showErrorToast } = useToast();
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [avatar, setAvatar] = useState("");
-  const [isTattooArtist, setIsTattooArtist] = useState(false);
-  const [expTime, setExpTime] = useState(0);
-  const [userTags, setUserTags] = useState([]);
-  const history = useHistory();
-  const [, setUser] = useGlobalUser();
-  const { createUser, login } = useLinkApi();
+  const { showErrorToast } = useToast()
+  const [name, setName] = useState("")
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [confirmPassword, setConfirmPassword] = useState("")
+  const [avatar, setAvatar] = useState("")
+  const [phone, setPhone] = useState("")
+  const [street, setStreet] = useState("")
+  const [city, setCity] = useState("")
+  const [uf, setUf] = useState("")
+  const [location, setLocation] = useState("")
+  const [isTattooArtist, setIsTattooArtist] = useState(false)
+  const [expTime, setExpTime] = useState(0)
+  const [userTags, setUserTags] = useState([])
+  const history = useHistory()
+  const [, setUser] = useGlobalUser()
+  const { createUser, login } = useLinkApi()
 
   async function register() {
-    if (!name.length || !password.length) {
-      showErrorToast(
-        "Faltam dados para o cadastro, escolha uma senha e um nome de usuário"
-      );
-      return;
+    if (
+      !name.length ||
+      !password.length ||
+      !email.length ||
+      userTags.length === 0
+    ) {
+      showErrorToast("Faltam dados para o cadastro. Preencha todos os campos!")
+      return
     }
+
+    if (isTattooArtist) {
+      if (!expTime || !street.length || !city.length || !uf.length) {
+        showErrorToast(
+          "Faltam dados para o cadastro. Preencha todos os campos!"
+        )
+        return
+      }
+    }
+
+    setLocation(`${street}-${city}-${uf}`)
 
     const response = await createUser(
       email,
@@ -44,22 +70,24 @@ export function RegisterUserScreen() {
       confirmPassword,
       isTattooArtist,
       expTime,
+      phone,
+      location,
       userTags
-    );
+    )
 
     if (response) {
-      const userResponse = await login(email, password);
+      const userResponse = await login(email, password)
 
-      setUser(userResponse);
+      setUser(userResponse)
 
-      history.push(ROUTES.HOME);
+      history.push(ROUTES.HOME)
     }
   }
 
   function handleSubmit(event) {
-    event.preventDefault();
+    event.preventDefault()
 
-    register();
+    register()
   }
 
   return (
@@ -69,7 +97,13 @@ export function RegisterUserScreen() {
         <img src={logo} className="register-user-logo"></img>
       </div>
       <form onSubmit={handleSubmit} className="register-user-content">
-        <Input value={name} onChange={setName} name="userName" label="Nome" />
+        <Input
+          value={name}
+          onChange={setName}
+          name="userName"
+          label="Nome"
+          inputProps={{ maxLength: 20 }}
+        />
 
         <Input
           value={email}
@@ -113,13 +147,50 @@ export function RegisterUserScreen() {
             style={{ color: "#a68689" }}
           />
           {isTattooArtist ? (
-            <Input
-              value={expTime}
-              onChange={setExpTime}
-              name="expTime"
-              type="number"
-              label="Tempo de experiência (anos)"
-            />
+            <>
+              <Input
+                value={expTime}
+                onChange={setExpTime}
+                name="expTime"
+                type="number"
+                label="Tempo de experiência (anos)"
+              />
+              <Input
+                value={phone}
+                onChange={setPhone}
+                name="phone"
+                label="Telefone"
+              />
+              <Input
+                value={street}
+                onChange={setStreet}
+                name="street"
+                label="Rua"
+              />
+              <Input
+                value={city}
+                onChange={setCity}
+                name="city"
+                label="Cidade"
+              />
+              <FormControl className="register-user-select-uf" fullWidth>
+                <InputLabel id="uf-select-label">UF</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={uf}
+                  label="UF"
+                  onChange={setUf}
+                >
+                  {UF.map((uf) => (
+                    <MenuItem key={uf} value={uf}>
+                      {" "}
+                      {uf}{" "}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </>
           ) : (
             ""
           )}
@@ -142,5 +213,5 @@ export function RegisterUserScreen() {
         </div>
       </form>
     </div>
-  );
+  )
 }

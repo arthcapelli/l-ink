@@ -1,27 +1,31 @@
-import { ButtonFunction, ButtonLink } from "../../components";
-import { ROUTES } from "../../../constants";
-import { useGlobalUser } from "../../../context";
-import { useHistory } from "react-router-dom";
-import "./style.css";
-import logo from "../../../assets/images/logo.png";
-import logout from "../../../assets/icons/logout.png";
-import create_post from "../../../assets/icons/add-post.png";
+import { ButtonFunction, ButtonLink } from "../../components"
+import { ROUTES } from "../../../constants"
+import { useGlobalUser } from "../../../context"
+import { useHistory } from "react-router-dom"
+import "./style.css"
+import logo from "../../../assets/images/logo.png"
+import logout from "../../../assets/icons/logout.png"
+import create_post from "../../../assets/icons/add-post.png"
 
 export function Header() {
-  const [user, setUser] = useGlobalUser();
-  const history = useHistory();
+  const [user, setUser] = useGlobalUser()
+  const { push } = useHistory()
 
   function handleLogout() {
-    setUser({});
-    history.push(ROUTES.HOME);
+    setUser({})
+    push(ROUTES.HOME)
   }
 
   function goHome() {
-    history.push(ROUTES.HOME);
+    push(ROUTES.HOME)
   }
 
   function goPost() {
-    history.push(ROUTES.CREATE_POST);
+    push(ROUTES.CREATE_POST)
+  }
+
+  function handleClickUser() {
+    push(`/profile/${user.id}`)
   }
 
   return (
@@ -31,7 +35,11 @@ export function Header() {
         <div className="header-user">
           <img onClick={goPost} src={create_post} className="img-header"></img>
           <img onClick={handleLogout} src={logout} className="img-header"></img>
-          <img src={user.avatar} className="avatar"></img>
+          <img
+            onClick={handleClickUser}
+            src={user.avatar}
+            className="avatar"
+          ></img>
         </div>
       ) : (
         <div className="header-anonymous">
@@ -48,5 +56,5 @@ export function Header() {
         </div>
       )}
     </div>
-  );
+  )
 }

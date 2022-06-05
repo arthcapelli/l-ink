@@ -1,26 +1,38 @@
 .create-post-img {
     height: 35%;
     object-fit: contain;
+    margin-bottom: 10px;
 }
 
 .create-post-screen {
     height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    
   }
 
   .create-post-content {
-    height: 40vh;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
   }
 
-  .create-post-middle {
+  .create-post-form{
+    min-height: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
-    margin-bottom: 20px;
+    
+  }
+
+  .create-post-form-input,.create-post-middle-measures{
+    margin-bottom: 10px;
+  }
+
+  .create-post-middle-measures {
+    display: flex;
+    
   }
 
   

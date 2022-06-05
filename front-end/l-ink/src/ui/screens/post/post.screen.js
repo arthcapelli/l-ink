@@ -3,9 +3,10 @@ import { useParams } from "react-router"
 import { useState, useEffect } from "react"
 import { useGlobalUser } from "../../../context"
 import { useLinkApi } from "../../../api"
-import { Header, Post, Comment, Input } from "../../components"
+import { Header, Post, Comment, Input, Tags } from "../../components"
 import { useToast } from "../../../hooks"
 import send from "../../../assets/icons/send.png"
+import info from "../../../assets/icons/info.png"
 
 export function PostScreen() {
   const { showErrorToast, showSuccessToast } = useToast()
@@ -49,6 +50,16 @@ export function PostScreen() {
         ) : (
           <>
             <Post item={post} key={post.id} />
+            <div className="post-screen-info container">
+              <div className="post-screen-info-icon">
+                <img src={info} alt="info" className="info-icon" />
+              </div>
+              <div className="post-screen-info-text">
+                <p>Local do corpo: {post.bodyLocal}</p>
+                <p>Medidas: {post.measures}</p>
+              </div>
+            </div>
+            <Tags tags={post.postTags} />
             <div className="post-screen-comments">
               <div className="container">
                 {!post.comments.length ? (
@@ -66,7 +77,7 @@ export function PostScreen() {
           <Input
             placeholder="Digite um comentário..."
             className="post-screen-input"
-            inputProps={{ maxLength: 200 }}
+            inputProps={{ maxLength: 40 }}
             value={commentText}
             onChange={setCommentText}
           />
