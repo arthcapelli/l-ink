@@ -2,30 +2,30 @@
     height: 85vh;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
 }
 
-.post-screen-info-text > p{
+.post-screen-info-text > p {
     margin: 0;
     font-size: 14px;
     text-align: left;
+    padding-left: 10px;
 }
 
-.post-screen-info{
+.post-screen-info {
     display: flex;
     width: 90%;
-    justify-content: space-evenly;
     align-items: center;
     border: 2px dashed rgb(136, 136, 136);
     border-radius: 5px;
-    padding: 5px 0;
+    padding: 5px;
 }
 
-.post-screen-info-icon{
+.post-screen-info-icon {
     width: 10%;
 }
 
-.info-icon{
+.info-icon {
     width: 100%;
 }
 

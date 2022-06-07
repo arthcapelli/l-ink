@@ -1,16 +1,5 @@
-import {
-  Input,
-  ButtonFunction,
-  ButtonLink,
-  Header,
-  Feed,
-} from "../../components";
-import { useLinkApi } from "../../../api";
-import { useState } from "react";
-import { useHistory } from "react-router-dom";
-import { ROUTES } from "../../../constants";
-import "./style.css";
-import logo from "../../../assets/images/logo.png";
+import { Header, Feed } from "../../components"
+import "./style.css"
 
 export function HomeScreen() {
   return (
@@ -20,5 +9,5 @@ export function HomeScreen() {
         <Feed />
       </div>
     </div>
-  );
+  )
 }

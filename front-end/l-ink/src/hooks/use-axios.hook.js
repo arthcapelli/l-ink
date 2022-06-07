@@ -30,6 +30,7 @@ const useAxios = () => {
       const { data } = await axiosInstance.request(requestConfig)
       return data
     } catch (requestError) {
+      hideLoader()
       showErrorToast(requestError.response.data.message)
     } finally {
       if (hideLoading) {

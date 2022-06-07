@@ -101,7 +101,7 @@ export function CreatePostScreen() {
               />
             </div>
 
-            <MultipleSelectChip setStyleTags={setPostTags} />
+            <MultipleSelectChip setStyleTags={setPostTags} hideLoader={true}/>
 
             <div>
               <ButtonFunction

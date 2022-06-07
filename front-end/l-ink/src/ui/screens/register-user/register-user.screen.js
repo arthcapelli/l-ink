@@ -135,7 +135,7 @@ export function RegisterUserScreen() {
           label="Imagem de perfil (url)"
         />
 
-        <MultipleSelectChip setStyleTags={setUserTags} />
+        <MultipleSelectChip setStyleTags={setUserTags} hideLoader={true} />
 
         <div className="register-user-select">
           <p className="register-user-select-label secondary-color">

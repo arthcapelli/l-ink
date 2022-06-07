@@ -5,7 +5,7 @@ const useLinkApi = () => {
   const HIDE_LOADER = true
   const KEEP_LOADER = false
 
-  const { get, post, put, del } = useAxios()
+  const { get, post } = useAxios()
 
   const createUser = async (
     email,
@@ -51,8 +51,8 @@ const useLinkApi = () => {
     return token
   }
 
-  const getTags = async () => {
-    const tags = await get(`tags`, HIDE_LOADER)
+  const getTags = async (shouldHideLoader) => {
+    const tags = await get(`tags`, shouldHideLoader)
     return tags
   }
 
@@ -71,8 +71,11 @@ const useLinkApi = () => {
     return response
   }
 
-  const getPosts = async (userId) => {
-    const posts = await get(`post?authUserId=${userId}`, HIDE_LOADER)
+  const getPosts = async (userId, filterTags) => {
+    const posts = await get(
+      `post?authUserId=${userId}&filterTags=${filterTags}`,
+      HIDE_LOADER
+    )
     return posts
   }
 

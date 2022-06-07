@@ -2,3 +2,19 @@
     width: 98%;
     margin: 0 auto;
 }
+
+.feed-filter {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+.feed-img-content {
+    width: 15%;
+    margin-left: 8px;
+}
+
+.search-img {
+    width: 100%;
+}
