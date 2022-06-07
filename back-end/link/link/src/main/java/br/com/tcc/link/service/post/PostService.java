@@ -88,10 +88,11 @@ public class PostService {
                 .collect(Collectors.toList());
     }
 
-    //Método que retorna a lista de posts filtrados pelas tags passadas como parâmetro, caso o parametro não seja nulo,
+    //Método que retorna a lista de posts filtrados pelas tags passadas como parâmetro, caso o parâmetro não seja nulo,
     private List<Post> getFilteredPosts(List<String> filterTags) {
         List<Post> postList;
-        if (!isNull(filterTags)) {
+        if (!isNull(filterTags) && !filterTags.isEmpty()) {
+            filterTags = tagsTreatment(filterTags);
             List<Integer> postIdFiltered = new ArrayList<>();
             List<PostTag> postTags = postTagService.findAllByTagNameIn(filterTags);
             List<Integer> postIds = postTags.stream().map(PostTag::getPostId).collect(Collectors.toList());
@@ -150,5 +151,12 @@ public class PostService {
         User user = userService.findById(postDomain.getUserId());
         List<String> userTags = userTagService.findAllByUserId(postDomain.getUserId());
         return userMapper.toUserResponse(user, userTags);
+    }
+
+    //Método que recebe a lista de tags a serem filtradas para substituir o caractere %20 que vem do front para representar espaço vazio
+    private List<String> tagsTreatment(final List<String> filterTags) {
+        return filterTags.stream()
+                .map(tag -> tag.replace("%20", " "))
+                .collect(Collectors.toList());
     }
 }

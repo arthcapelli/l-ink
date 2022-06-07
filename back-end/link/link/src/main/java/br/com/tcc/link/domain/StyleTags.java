@@ -7,13 +7,13 @@ import lombok.Getter;
 public enum StyleTags {
 
     BLACKWORK("Blackwork"),
-    OLD_SCHOOL("Old school"),
-    FINELINE("Fine line"),
+    OLD_SCHOOL("Old School"),
+    FINELINE("Fine Line"),
     AQUARELA("Aquarela"),
     PONTILISM("Pontilismo"),
     MINIMALISM("Minimalista"),
     GEOMETRIC("Geometrica"),
-    SINGLE_LINE("Single line"),
+    SINGLE_LINE("Single Line"),
     ORIENTAL("Oriental"),
     REALISTIC("Realista"),
     MAORI("Maori"),

@@ -36,6 +36,7 @@ import static br.com.tcc.link.fixture.UserCommentResponseFixture.makeRandomUserC
 import static br.com.tcc.link.fixture.UserFixture.makeRandomUser;
 import static br.com.tcc.link.fixture.UserResponseFixture.makeRandomUserResponse;
 import static java.util.Arrays.asList;
+import static java.util.Collections.emptyList;
 import static org.apache.commons.lang3.RandomUtils.nextInt;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -133,7 +134,7 @@ public class PostServiceTest {
     }
 
     @Test
-    public void returnAllPostsResponsesWithSuccess() {
+    public void returnAllPostsResponsesIfFilterTagsisNullWithSuccess() {
         Integer authUserId = nextInt();
         List<Post> postList = asList(post);
         List<String> userTags = List.of("Blackwork");
@@ -147,6 +148,41 @@ public class PostServiceTest {
         when(mapper.toPostResponse(post, postTags, userResponse, Boolean.TRUE)).thenReturn(postResponse);
 
         List<PostResponse> response = service.getAllPosts(authUserId, null);
+
+        assertEquals(postResponse.getId(), response.get(0).getId());
+        assertEquals(postResponse.getPostImg(), response.get(0).getPostImg());
+        assertEquals(postResponse.getMeasures(), response.get(0).getMeasures());
+        assertEquals(postResponse.getUserResponse().getId(), response.get(0).getUserResponse().getId());
+        assertEquals(postResponse.getUserResponse().getName(), response.get(0).getUserResponse().getName());
+        assertEquals(postResponse.getUserResponse().getAvatar(), response.get(0).getUserResponse().getAvatar());
+        assertEquals(postResponse.getUserResponse().getExpTime(), response.get(0).getUserResponse().getExpTime());
+        assertEquals(postResponse.getUserResponse().isTattooArtist(), response.get(0).getUserResponse().isTattooArtist());
+        assertEquals(postResponse.getUserResponse().getUserTags().get(0), response.get(0).getUserResponse().getUserTags().get(0));
+        assertEquals(postResponse.getUserResponse().getStreet(), response.get(0).getUserResponse().getStreet());
+        assertEquals(postResponse.getUserResponse().getCity(), response.get(0).getUserResponse().getCity());
+        assertEquals(postResponse.getUserResponse().getUf(), response.get(0).getUserResponse().getUf());
+        assertEquals(postResponse.getUserResponse().getPhone(), response.get(0).getUserResponse().getPhone());
+        for (int i = 0; i < postTags.size(); i++) {
+            assertEquals(postTags.get(i), response.get(0).getPostTags().get(i));
+        }
+        assertEquals(postResponse.getIsFavorite(), response.get(0).getIsFavorite());
+    }
+
+    @Test
+    public void returnAllPostsResponsesIfFilterTagsisEmptyWithSuccesS() {
+        Integer authUserId = nextInt();
+        List<Post> postList = asList(post);
+        List<String> userTags = List.of("Blackwork");
+
+        when(repository.findAllByOrderByIdDesc()).thenReturn(postList);
+        when(userService.findById(post.getUserId())).thenReturn(user);
+        when(userTagService.findAllByUserId(user.getId())).thenReturn(userTags);
+        when(userMapper.toUserResponse(user, userTags)).thenReturn(userResponse);
+        when(postTagService.findAllByPostId(post.getId())).thenReturn(postTags);
+        when(favoriteService.existsFavorite(authUserId, post.getId())).thenReturn(Boolean.TRUE);
+        when(mapper.toPostResponse(post, postTags, userResponse, Boolean.TRUE)).thenReturn(postResponse);
+
+        List<PostResponse> response = service.getAllPosts(authUserId, emptyList());
 
         assertEquals(postResponse.getId(), response.get(0).getId());
         assertEquals(postResponse.getPostImg(), response.get(0).getPostImg());
