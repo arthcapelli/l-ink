@@ -17,13 +17,13 @@ public class PostController {
     @Autowired
     PostService postService;
 
-    @PostMapping("criar-post")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public String createPost(@RequestBody final CreatePostRequest request) {
         return postService.create(request);
     }
 
-    @DeleteMapping("deletar-post/{postId}")
+    @DeleteMapping
     @ResponseStatus(HttpStatus.OK)
     public void deletePost(@PathVariable Integer postId) {
         postService.delete(postId);

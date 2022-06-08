@@ -52,7 +52,7 @@ export function MultipleSelectChip({ setStyleTags, hideLoader }) {
           Tags
         </InputLabel>
         <Select
-          style={{ maxWidth: 300, width: 300 }}
+          style={{ maxWidth: 270, width: 270 }}
           labelId="demo-multiple-chip-label"
           id="demo-multiple-chip"
           multiple

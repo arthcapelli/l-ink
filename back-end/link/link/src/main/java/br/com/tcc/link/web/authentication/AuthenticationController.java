@@ -8,7 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("autenticacao")
+@RequestMapping("auth")
 public class AuthenticationController {
 
     @Autowired

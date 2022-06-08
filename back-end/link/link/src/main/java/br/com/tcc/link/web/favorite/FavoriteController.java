@@ -13,9 +13,9 @@ public class FavoriteController {
     @Autowired
     private FavoriteService service;
 
-    @PostMapping("favoritar-post")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void createPost(@RequestBody final CreateFavoriteRequest request) {
+    public void createFavorite(@RequestBody final CreateFavoriteRequest request) {
         service.favoritePost(request);
     }
 }

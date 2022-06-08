@@ -14,6 +14,7 @@ export function Input({ onChange, ...props }) {
         {...props}
         onChange={handleChange}
         variant="outlined"
+        style={{ backgroundColor: "white" }}
       />
     </Grid>
   )

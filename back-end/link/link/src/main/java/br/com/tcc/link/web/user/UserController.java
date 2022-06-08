@@ -9,13 +9,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("usuario")
+@RequestMapping("user")
 public class UserController {
 
     @Autowired
     UserService userService;
 
-    @PostMapping("criar-usuario")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public UserResponse createUser(@RequestBody final CreateUserRequest request) {
         return userService.create(request);

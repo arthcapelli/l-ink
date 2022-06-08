@@ -1,7 +1,18 @@
+.register-user-screen-full {
+  background-image: url('../../../assets/images/bg-default.jpg');
+}
+
+.register-user-screen-bg {
+  background-color: #F3EEEF;
+  box-shadow: 0px 4px 15px 0px rgba(89,8,30,0.82);
+    border-radius: 10px;
+}
+
 .register-user-screen {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
+  margin: 10px;
 }
 
 .register-user-header {
@@ -20,7 +31,14 @@
 }
 
 .register-user-content {
-  height: 85vh;
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.register-user-content-artist {
+  min-height: 150vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -39,6 +57,10 @@
 
 .register-user-select-label{
   margin: 15px 0 0 0;
+}
+
+.register-user-screen-btns {
+  padding-bottom: 30px;
 }
 
 .register-user-btn-label {

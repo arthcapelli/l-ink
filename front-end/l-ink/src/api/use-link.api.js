@@ -20,7 +20,7 @@ const useLinkApi = () => {
     userTags
   ) => {
     const response = await post(
-      `usuario/criar-usuario`,
+      `user`,
       {
         email,
         avatar,
@@ -41,7 +41,7 @@ const useLinkApi = () => {
 
   const login = async (email, password) => {
     const token = await post(
-      `autenticacao/login`,
+      `auth/login`,
       {
         email,
         password,
@@ -58,7 +58,7 @@ const useLinkApi = () => {
 
   const createPost = async (postImg, bodyLocal, measures, userId, postTags) => {
     const response = await post(
-      `post/criar-post`,
+      `post`,
       {
         postImg,
         bodyLocal,
@@ -81,7 +81,7 @@ const useLinkApi = () => {
 
   const favoritePost = async (postId, userId) => {
     await post(
-      `favorite/favoritar-post`,
+      `favorite`,
       {
         userId,
         postId,
@@ -98,7 +98,7 @@ const useLinkApi = () => {
 
   const createComment = async (postId, userId, commentText) => {
     const response = await post(
-      `comment/criar-comentario`,
+      `comment`,
       {
         postId,
         userId,
