@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react"
 import { useLinkApi } from "../../../api"
-import Box from "@material-ui/core/Box"
-import OutlinedInput from "@material-ui/core/OutlinedInput"
-import InputLabel from "@material-ui/core/InputLabel"
-import MenuItem from "@material-ui/core/MenuItem"
-import FormControl from "@material-ui/core/FormControl"
-import Select from "@material-ui/core/Select"
-import Chip from "@material-ui/core/Chip"
+import Box from "@mui/material/Box"
+import OutlinedInput from "@mui/material/OutlinedInput"
+import InputLabel from "@mui/material/InputLabel"
+import MenuItem from "@mui/material/MenuItem"
+import FormControl from "@mui/material/FormControl"
+import Select from "@mui/material/Select"
+import Chip from "@mui/material/Chip"
 
 const ITEM_HEIGHT = 48
 const ITEM_PADDING_TOP = 8
@@ -45,14 +45,9 @@ export function MultipleSelectChip({ setStyleTags, hideLoader }) {
   return (
     <div>
       <FormControl sx={{ m: 1, width: 300 }}>
-        <InputLabel
-          id="demo-multiple-chip-label"
-          style={{ marginLeft: "15px" }}
-        >
-          Tags
-        </InputLabel>
+        <InputLabel id="demo-multiple-chip-label">Tags</InputLabel>
         <Select
-          style={{ maxWidth: 270, width: 270 }}
+          style={{ maxWidth: 270, width: 270, borderColor: "red" }}
           labelId="demo-multiple-chip-label"
           id="demo-multiple-chip"
           multiple

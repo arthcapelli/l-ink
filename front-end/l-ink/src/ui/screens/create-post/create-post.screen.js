@@ -12,19 +12,18 @@ import { useToast } from "../../../hooks"
 import "./style.css"
 import { useGlobalUser } from "../../../context"
 import bg_image from "../../../assets/icons/bg-image.png"
-import { height, width } from "@mui/system"
 
 export function CreatePostScreen() {
   const { showErrorToast, showSuccessToast } = useToast()
   const [postImg, setPostImg] = useState("")
   const [bodyLocal, setBodyLocal] = useState("")
-  const [measures, setMeasures] = useState("")
   const [height, setHeight] = useState("")
   const [width, setWidth] = useState("")
   const [postTags, setPostTags] = useState([])
   const history = useHistory()
   const [user] = useGlobalUser()
   const { createPost } = useLinkApi()
+  let measures = ""
 
   async function create() {
     if (!postImg.length || postTags.length === 0) {
@@ -32,7 +31,7 @@ export function CreatePostScreen() {
       return
     }
 
-    setMeasures(`${height}x${width}`)
+    measures = `${height}x${width}`
 
     const response = await createPost(
       postImg,
@@ -101,7 +100,7 @@ export function CreatePostScreen() {
               />
             </div>
 
-            <MultipleSelectChip setStyleTags={setPostTags} hideLoader={true}/>
+            <MultipleSelectChip setStyleTags={setPostTags} hideLoader={true} />
 
             <div>
               <ButtonFunction

@@ -30,7 +30,7 @@ export function Feed() {
   return (
     <>
       <div className="feed-filter container">
-        <div>
+        <div className="feed-filter-tags">
           <MultipleSelectChip setStyleTags={setFilterTags} hideLoader={false} />
         </div>
         <div className="feed-img-content">

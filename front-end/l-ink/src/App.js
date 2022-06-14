@@ -11,7 +11,7 @@ import {
   PostScreen,
   ProfileScreen,
 } from "./ui/screens/index"
-import { createTheme, ThemeProvider } from "@material-ui/core/styles"
+import { createTheme, ThemeProvider } from "@mui/material/styles"
 import { useGlobalUser } from "./context"
 
 function PrivateRoute({ path, children }) {

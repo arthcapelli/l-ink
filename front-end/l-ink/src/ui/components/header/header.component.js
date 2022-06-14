@@ -1,4 +1,4 @@
-import { ButtonFunction, ButtonLink } from "../../components"
+import { ButtonLink } from "../../components"
 import { ROUTES } from "../../../constants"
 import { useGlobalUser } from "../../../context"
 import { useHistory } from "react-router-dom"

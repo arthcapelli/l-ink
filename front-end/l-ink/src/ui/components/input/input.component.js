@@ -1,6 +1,6 @@
 import "./style.css"
-import TextField from "@material-ui/core/TextField"
-import Grid from "@material-ui/core/Grid"
+import TextField from "@mui/material/TextField"
+import Grid from "@mui/material/Grid"
 
 export function Input({ onChange, ...props }) {
   function handleChange(event) {

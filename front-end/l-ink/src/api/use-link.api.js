@@ -110,7 +110,7 @@ const useLinkApi = () => {
   }
 
   const getUser = async (userId) => {
-    const user = await get(`usuario/${userId}`, HIDE_LOADER)
+    const user = await get(`user/${userId}`, HIDE_LOADER)
     return user
   }
 
