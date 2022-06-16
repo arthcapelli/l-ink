@@ -40,6 +40,8 @@ export function RegisterUserScreen() {
   const { createUser, login } = useLinkApi()
   const { push } = useHistory()
 
+  // Função que valida se todos os campos necessários foram preenchidos, caso positivo os dados são utilizados para criação
+  // de um usuário e em seguida já executa o login do mesmo e renderiza a página de home
   async function register() {
     if (
       !name.length ||
@@ -84,16 +86,20 @@ export function RegisterUserScreen() {
     }
   }
 
+  // Função que previne o comportamento padrão do formulário, que seria renderizar a página novamente, para que as informações
+  // preenchidas possam ser utilizadas na função de criação de usuário
   function handleSubmit(event) {
     event.preventDefault()
 
     register()
   }
 
+  // Função para inserir o valor de UF selecionado no formulário
   function handleSelectChange(event) {
     setUf(event.target.value)
   }
 
+  // Função que renderiza a página de home
   function goHome() {
     push(ROUTES.HOME)
   }

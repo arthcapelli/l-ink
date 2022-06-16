@@ -17,6 +17,8 @@ export function PostScreen() {
   const { id } = useParams()
   const { createComment, getPost } = useLinkApi()
 
+  // Função que renderiza o post específico, passando um id e userId, podendo ser chamada mais vezes em caso de mudança no estado
+  // da constante refresh
   useEffect(() => {
     async function getApiPost() {
       const apiPost = await getPost(id, user.id)
@@ -26,6 +28,9 @@ export function PostScreen() {
     getApiPost()
   }, [refresh])
 
+  // Função que valida se o usuário digitou algo no campo de commentText, se sim ela chamada a função de criar comentário
+  // passando o id do post, do usuário e o texto digitado, ao final ela muda o estado de refresh para que o post
+  // seja renderizado novamente, com o comentário inserido
   async function handleComment() {
     if (!commentText.length) {
       showErrorToast("Insira uma mensagem para criar o comentário!")

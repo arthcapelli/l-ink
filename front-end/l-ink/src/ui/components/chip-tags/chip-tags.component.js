@@ -25,6 +25,7 @@ export function MultipleSelectChip({ setStyleTags, hideLoader }) {
 
   const { getTags } = useLinkApi()
 
+  // Função para renderizar na tela as tags cadastradas no back, quando o componente for inicializado
   useEffect(() => {
     async function getApiTags() {
       const apiTags = await getTags(hideLoader)
@@ -34,6 +35,7 @@ export function MultipleSelectChip({ setStyleTags, hideLoader }) {
     getApiTags()
   }, [])
 
+  // Função para adicionar ou remover tags conforme o usuário for selecionando
   const handleChange = (event) => {
     const {
       target: { value },

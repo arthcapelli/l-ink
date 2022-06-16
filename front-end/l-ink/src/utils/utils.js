@@ -1,5 +1,4 @@
-import { useHistory } from "react-router-dom"
-
+// Função que retorna a data (DD/MM/AAAA) utilizando um parâmetro recebido
 function getDate(createdAt) {
   const dateObj = new Date(createdAt)
   const month = dateObj.getMonth() + 1
@@ -8,6 +7,7 @@ function getDate(createdAt) {
   return `${day}/${month}/${year}`
 }
 
+// Função que retorna o horário (HH:MM:SS) utilizando um parâmetro recebido
 function getBrazilianTime(createdAt) {
   const dateObj = new Date(createdAt)
   const hour = dateObj.getHours()

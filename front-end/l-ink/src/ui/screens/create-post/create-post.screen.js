@@ -25,6 +25,8 @@ export function CreatePostScreen() {
   const { createPost } = useLinkApi()
   let measures = ""
 
+  // Função para criação de post, que valida se o usário inseriu uma imagem e atribuiu tags ao mesmo e, em seguida, renderiza a página
+  // de home
   async function create() {
     if (!postImg.length || postTags.length === 0) {
       showErrorToast("Insira uma imagem e tags para criar o post!")
@@ -47,6 +49,8 @@ export function CreatePostScreen() {
     }
   }
 
+  // Função que previne o comportamento padrão do formulário, que seria renderizar a página novamente, para que as informações
+  // preenchidas possam ser utilizadas na função de criação de post
   function handleSubmit(event) {
     event.preventDefault()
 

@@ -14,10 +14,13 @@ export function Feed() {
 
   const { getPosts } = useLinkApi()
 
+  // Função para negar o estado da constante search, a fim de executar a filtragem dos posts no feed
   function handleSearchClick() {
     setSearch(!search)
   }
 
+  // Função para realizar a renderização dos posts no feed, podendo ser executada novamente caso ocorra mudança na
+  // constante search
   useEffect(() => {
     async function getApiPosts() {
       const apiPosts = await getPosts(user.id || 0, filterTags)

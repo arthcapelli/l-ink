@@ -1,5 +1,5 @@
 import { useEffect } from "react"
-import { Route, Switch, Redirect, useHistory } from "react-router-dom"
+import { Route, Switch, Redirect } from "react-router-dom"
 import "./App.css"
 import { ROUTES } from "./constants/index"
 import { Loader, Toast } from "./ui/components"
@@ -14,6 +14,7 @@ import {
 import { createTheme, ThemeProvider } from "@mui/material/styles"
 import { useGlobalUser } from "./context"
 
+// Função que permite a renderização de páginas caso o usuário esteja logado, senão o mesmo será redirecionado à página de login
 function PrivateRoute({ path, children }) {
   const [user] = useGlobalUser()
 

@@ -4,17 +4,7 @@ import machine from "../../../assets/icons/machine.png"
 import whatsapp from "../../../assets/icons/whatsapp.png"
 
 export function ProfileInfo({ user }) {
-  const {
-    name,
-    userTags,
-    avatar,
-    street,
-    city,
-    uf,
-    phone,
-    tattooArtist,
-    expTime,
-  } = user
+  const { name, avatar, street, city, uf, phone, tattooArtist, expTime } = user
 
   return (
     <div className="profile-info">

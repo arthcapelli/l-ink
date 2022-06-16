@@ -11,19 +11,23 @@ export function Header() {
   const [user, setUser] = useGlobalUser()
   const { push } = useHistory()
 
+  // Função que limpa o usuário global e renderiza a página de home
   function handleLogout() {
     setUser({})
     push(ROUTES.HOME)
   }
 
+  // Função para renderizar a página de home
   function goHome() {
     push(ROUTES.HOME)
   }
 
+  // Função que renderiza a página para criação de post
   function goPost() {
     push(ROUTES.CREATE_POST)
   }
 
+  // Função que renderiza a página de perfil do usuário logado
   function handleClickUser() {
     push(`/profile/${user.id}`)
   }

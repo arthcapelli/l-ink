@@ -1,28 +1,18 @@
 import "./style.css"
-import { useHistory, useParams } from "react-router"
+import { useParams } from "react-router"
 import { useState, useEffect } from "react"
 import { useGlobalUser } from "../../../context"
 import { useLinkApi } from "../../../api"
-import {
-  Header,
-  Post,
-  // Comment,
-  // Input,
-  ProfileInfo,
-  Tags,
-} from "../../components"
-import { useToast } from "../../../hooks"
+import { Header, Post, ProfileInfo, Tags } from "../../components"
 
 export function ProfileScreen() {
-  // const { showErrorToast, showSuccessToast } = useToast()
   const [userApi, setUserApi] = useState(null)
   const [userPostsApi, setUserPostsApi] = useState([])
-  // const [commentText, setCommentText] = useState("")
-  // const [refresh, setRefresh] = useState(false)
   const [user] = useGlobalUser()
   const { id } = useParams()
   const { getUser, getUserPosts } = useLinkApi()
 
+  // Função que utiliza um id para retornar o respectivo usuário, bem como os posts criados pelo mesmo
   useEffect(() => {
     async function getApiUser() {
       const apiUser = await getUser(id)
@@ -37,21 +27,6 @@ export function ProfileScreen() {
     getApiUser()
     getApiUserPosts()
   }, [])
-
-  //   async function handleComment() {
-  //     if (!commentText.length) {
-  //       showErrorToast("Insira uma mensagem para criar o comentário!")
-  //       return
-  //     }
-
-  //     const response = await createComment(id, user.id, commentText)
-
-  //     if (response.length) {
-  //       showSuccessToast(response)
-  //       setRefresh(!refresh)
-  //       setCommentText("")
-  //     }
-  //   }
 
   return (
     <div>

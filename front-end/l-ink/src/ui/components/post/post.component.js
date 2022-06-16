@@ -8,15 +8,16 @@ import machine from "../../../assets/icons/machine.png"
 
 export function Post({ item }) {
   const { id, userResponse, postImg, isFavorite, createdAt } = item
-
   const [user] = useGlobalUser()
   const [favorite, setFavorite] = useState(isFavorite)
   const { push } = useHistory()
 
+  // Função para renderizar a página do post passando o id respectivo
   function handleClickPost() {
     push(`/post/${id}`)
   }
 
+  // Função para renderizar a página de perfil do usuário passando o id respectivo
   function handleClickUser() {
     push(`/profile/${userResponse.id}`)
   }

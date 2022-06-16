@@ -16,6 +16,8 @@ export function LoginScreen() {
   const history = useHistory()
   const { login } = useLinkApi()
 
+  // Função para realizar o login do usuário, validando se o mesmo inseriu um email e senha, caso seja executada com sucesso
+  // redireciona para a página de home com o usuário global populado
   async function loginApp() {
     if (!email.length || !password.length) {
       showErrorToast("Campos devem ser preenchidos")
@@ -31,8 +33,10 @@ export function LoginScreen() {
     }
   }
 
-  function handleSubmit(evento) {
-    evento.preventDefault()
+  // Função que previne o comportamento padrão do formulário, que seria renderizar a página novamente, para que as informações
+  // preenchidas possam ser utilizadas na função de login no app
+  function handleSubmit(event) {
+    event.preventDefault()
 
     loginApp()
   }

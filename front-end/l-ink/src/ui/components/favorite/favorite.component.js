@@ -8,10 +8,12 @@ export function Favorite({ postId, isFavorite, setIsFavorite }) {
   const [user] = useGlobalUser()
   const { favoritePost } = useLinkApi()
 
+  // Função que é chamada no clique do usuário, para executar a função de favoritar o post
   async function handleClick() {
     await favorite()
   }
 
+  // Função que favorita o post passando o id do mesmo e do usuário logado
   async function favorite() {
     setIsFavorite(!isFavorite)
     await favoritePost(postId, user.id)

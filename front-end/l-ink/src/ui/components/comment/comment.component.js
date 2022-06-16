@@ -6,6 +6,7 @@ export function Comment({ item }) {
   const { push } = useHistory()
   const { userResponse, commentText } = item
 
+  // Função que que é chamada no clique do usuário, para entrar no perfil do id correspondente
   function handleClickUser() {
     push(`/profile/${userResponse.id}`)
   }

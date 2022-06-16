@@ -8,11 +8,13 @@ const axiosInstance = axios.create({
   baseURL: API_URL,
 })
 
+// Função que utiliza o axios para o consumir a API
 const useAxios = () => {
   const { showErrorToast } = useToast()
   const { showLoader, hideLoader } = useLoader()
   const [user] = useGlobalUser()
 
+  // Função para centralizar a chamada da API, podendo controlar se o loader aparece ou não
   const callApi = async (method, url, data, hideLoading, showLoading) => {
     const requestConfig = {
       method,
