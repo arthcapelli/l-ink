@@ -60,7 +60,7 @@ export function MultipleSelectChip({ setStyleTags, hideLoader }) {
               sx={{ display: "flex", flexWrap: "wrap" }}
             >
               {selected.map((value) => (
-                <Chip style={{ margin: "2px" }} key={value} label={value} />
+                <Chip key={value} label={value} />
               ))}
             </Box>
           )}
