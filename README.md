@@ -43,7 +43,9 @@ $ npm install
 # Rode o projeto
 $ npm start
 
-# O projeto inciará na porta:9090 - acesse <http://localhost:9090>
+# O projeto inciará na porta:8090 - acesse <http://localhost:8090>
+
+# No navegador, pressione F12 e ajuste para visualização como mobile.
 ```
 
 ## 👨‍💻👩‍💻 **_Autores_**
