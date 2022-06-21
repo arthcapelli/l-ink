@@ -43,7 +43,7 @@ $ npm install
 # Rode o projeto
 $ npm start
 
-# O projeto inciará na porta:8090 - acesse <http://localhost:8090>
+# O projeto inciará na porta:3000 - acesse <http://localhost:3000>
 
 # No navegador, pressione F12 e ajuste para visualização como mobile.
 ```
