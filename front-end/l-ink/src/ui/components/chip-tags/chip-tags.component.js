@@ -44,7 +44,11 @@ export function MultipleSelectChip({ setStyleTags, hideLoader }) {
 
   return (
     <div>
-      <FormControl sx={{ m: 1, width: 300 }}>
+      <FormControl
+        sx={{
+          width: 300,
+        }}
+      >
         <InputLabel id="demo-multiple-chip-label">Tags</InputLabel>
         <Select
           style={{ maxWidth: 270, width: 270, borderColor: "red" }}
